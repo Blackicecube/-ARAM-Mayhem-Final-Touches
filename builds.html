@@ -454,12 +454,10 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4 class="footer-heading">Champions</h4>
+          <h4 class="footer-heading">Browse builds</h4>
           <ul>
-            <li><a href="champion-detail.html?champion=lux">Lux</a></li>
-            <li><a href="champion-detail.html?champion=jinx">Jinx</a></li>
-            <li><a href="champion-detail.html?champion=malphite">Malphite</a></li>
-            <li><a href="champion-detail.html?champion=thresh">Thresh</a></li>
+            <li><a href="builds.html?sort=votes">Most upvoted builds</a></li>
+            <li><a href="builds.html?sort=spicy">Spiciest builds</a></li>
           </ul>
         </div>
       </div>
@@ -607,6 +605,13 @@
     });
   }
 
+  const pageParams = new URLSearchParams(window.location.search);
+  const urlSort = pageParams.get('sort');
+  if (urlSort && ['votes', 'spicy', 'comments'].includes(urlSort) && sortSelect) {
+    sortMode = urlSort;
+    sortSelect.value = urlSort;
+  }
+
   /* ── Upvote buttons ───────────────────────────────────── */
   document.querySelectorAll('.feed-vote-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -678,13 +683,15 @@
   }
 
   /* ── Read ?search= from URL on page load ─────────────────── */
-  const urlQ = new URLSearchParams(window.location.search).get('search');
+  const urlQ = pageParams.get('search');
   if (urlQ) {
     searchQuery = urlQ;
     if (searchInput)    { searchInput.value    = urlQ; }
     if (navSearchInput) { navSearchInput.value = urlQ; }
     applyFilters();
   }
+
+  applySort();
 
   function resolveBuildChampionSlug(b) {
     if (b.championKey && typeof b.championKey === 'string') return b.championKey;
@@ -850,6 +857,7 @@
 
     // Re-run filters to include the new cards in the count
     applyFilters();
+    applySort();
   })();
 
   populateChampionDropdown();

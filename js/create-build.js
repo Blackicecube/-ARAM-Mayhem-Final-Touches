@@ -525,6 +525,9 @@ function syncPublishedPreview() {
         if (c.icon) {
           img.src = c.icon;
           img.alt = '';
+          img.referrerPolicy = 'no-referrer';
+          img.loading = 'eager';
+          img.decoding = 'async';
           img.onerror = () => img.classList.add('bd-icon-err');
         } else {
           img.classList.add('bd-icon-err');
@@ -584,6 +587,9 @@ function syncPublishedPreview() {
       if (!empty && p.icon) {
         img.src = p.icon;
         img.alt = '';
+        img.referrerPolicy = 'no-referrer';
+        img.loading = 'eager';
+        img.decoding = 'async';
         img.onerror = () => img.classList.add('bd-icon-err');
       } else {
         img.classList.add('bd-icon-err');

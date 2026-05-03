@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Champions — ARAM Bound | ARAM Mayhem Builds</title>
+  <meta name="description" content="Browse the full League of Legends ARAM roster on ARAM Bound. Discover builds, strategies, and augments for the Howling Abyss." />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">⚔</span>
+        <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"     class="nav-link"        id="nav-home">Home</a></li>
+        <li><a href="champions.html" class="nav-link active" id="nav-champions">Champions</a></li>
+        <li><a href="builds.html"    class="nav-link"        id="nav-builds">Builds</a></li>
+      </ul>
+      <!-- Global search -->
+      <div class="nav-search-wrap" id="navSearchWrap">
+        <input type="search" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
+        <button type="button" class="nav-search-submit" id="navSearchBtn" aria-label="Search">&#x1F50D;</button>
+      </div>
+      <div class="nav-actions">
+        <a href="create.html" class="btn btn-primary" id="nav-submit-btn">+ Submit Build</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =====================================================
+       PAGE HERO
+  ====================================================== -->
+  <header class="page-hero" id="page-hero">
+    <div class="page-hero-ornament page-hero-ornament--left"></div>
+    <div class="page-hero-ornament page-hero-ornament--right"></div>
+
+    <div class="page-hero-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="page-breadcrumb-sep">›</span>
+        <span>Champions</span>
+      </nav>
+      <h1 class="page-hero-title">Champion Roster</h1>
+      <p class="page-hero-sub">
+        Every champion available on ARAM Bound — with ARAM Mayhem win rates,
+        submitted builds, and strategies for the Howling Abyss.
+      </p>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       STICKY FILTER BAR
+  ====================================================== -->
+  <div class="filter-bar-wrapper" id="filter-bar-wrapper">
+    <div class="filter-bar" id="filterBar" role="group" aria-label="Filter and search champions">
+      <span class="filter-label">Filter champion:</span>
+
+      <div class="filter-bar-search-wrap filter-bar-search-combobox" id="championSearchCombobox">
+        <input
+          type="search"
+          class="filter-bar-search-input"
+          id="championSearchInput"
+          placeholder="Search champions…"
+          autocomplete="off"
+          enterkeyhint="search"
+          aria-label="Search champions by name"
+          aria-autocomplete="list"
+          aria-controls="championSearchResults"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          role="combobox"
+        />
+        <ul
+          class="champion-search-dropdown"
+          id="championSearchResults"
+          role="listbox"
+          aria-label="Matching champions"
+          hidden
+        ></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="filter-bar-wrapper filter-bar-wrapper--playstyle" id="championPlaystyleFilterWrap">
+    <div
+      class="filter-bar filter-bar--playstyle"
+      id="championPlaystyleFilterBar"
+      role="group"
+      aria-label="Filter by champion tags"
+    ></div>
+  </div>
+
+  <!-- =====================================================
+       CHAMPION CARDS
+  ====================================================== -->
+  <section class="champions-page-section" id="champions-list">
+    <div class="container">
+      <div class="champions-full-grid" id="championsGrid">
+
+      </div><!-- /champions-full-grid -->
+
+      <!-- No results message (shown when filter returns empty) -->
+      <p
+        class="no-results-msg"
+        id="noResultsMsg"
+        style="display:none; text-align:center; color:var(--text-muted); padding:48px 0; font-family:var(--font-ui); font-size:0.9rem;"
+      >
+        No champions match this filter.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       COMING SOON
+  ====================================================== -->
+  <section class="coming-soon-section" id="coming-soon">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Expanding Roster</span>
+        <h2 class="section-title">Grow the Hub</h2>
+        <p class="section-sub">
+          Every League champion is listed above. Submit builds and strategies so your favorites get guides and augment rankings.
+        </p>
+      </div>
+
+      <div class="coming-soon-grid">
+        <div class="coming-soon-card" id="soon-jinx">
+          <div class="coming-soon-icon">🔒</div>
+          <div class="coming-soon-label">Jinx</div>
+        </div>
+        <div class="coming-soon-card" id="soon-yasuo">
+          <div class="coming-soon-icon">🔒</div>
+          <div class="coming-soon-label">Yasuo</div>
+        </div>
+        <div class="coming-soon-card" id="soon-zed">
+          <div class="coming-soon-icon">🔒</div>
+          <div class="coming-soon-label">Zed</div>
+        </div>
+        <div class="coming-soon-card" id="soon-thresh">
+          <div class="coming-soon-icon">🔒</div>
+          <div class="coming-soon-label">Thresh</div>
+        </div>
+        <div class="coming-soon-card" id="soon-miss-fortune">
+          <div class="coming-soon-icon">🔒</div>
+          <div class="coming-soon-label">Miss Fortune</div>
+        </div>
+        <div class="coming-soon-card" id="soon-more">
+          <div class="coming-soon-icon">✦</div>
+          <div class="coming-soon-label">+ More</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo footer-logo" id="footer-logo">
+            <span class="logo-icon">⚔</span>
+            <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+          </a>
+          <p class="footer-tagline">
+            The premier resource for League of Legends ARAM Mayhem players.
+            Share builds, discuss strategies, and conquer the Howling Abyss.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="builds.html">Builds</a></li>
+            <li><a href="create.html">Submit Build</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Champions</h4>
+          <ul>
+            <li><a href="champion-detail.html?champion=ahri">Ahri Builds</a></li>
+            <li><a href="champion-detail.html?champion=lux">Lux Builds</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">
+          ARAM Bound is a fan-made website and is not affiliated with or endorsed by Riot Games.
+          League of Legends and all related marks are trademarks of Riot Games, Inc. All champion images © Riot Games.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================
+       AHRI AUGMENT MODAL
+  ====================================================== -->
+  <div
+    class="augment-modal-overlay"
+    id="modal-ahri"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="ahri-modal-title"
+  >
+    <div class="augment-modal" id="augment-modal-ahri">
+
+      <!-- Header -->
+      <div class="augment-modal-header">
+        <div class="augment-modal-champion">
+          <img
+            src="https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Ahri.png"
+            alt="Ahri"
+            class="augment-modal-icon"
+          />
+          <div>
+            <div class="augment-modal-title" id="ahri-modal-title">Ahri — Top Augments</div>
+            <div class="augment-modal-sub">Top-voted BiS picks for ARAM Mayhem</div>
+          </div>
+        </div>
+        <button class="augment-modal-close" id="close-modal-ahri" aria-label="Close augment modal">✕</button>
+      </div>
+
+      <!-- Body -->
+      <div class="augment-modal-body">
+        <p class="augment-modal-intro">
+          These augments are ranked by reader upvotes from ARAM Mayhem players.
+          Prismatic augments are the rarest and most impactful — plan your coin flips accordingly.
+        </p>
+
+        <div class="augment-list">
+
+          <!-- 1. Jeweled Gauntlet -->
+          <div class="augment-item" id="ahri-aug-1">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank top">1</span>
+                <div>
+                  <div class="augment-name">Jeweled Gauntlet</div>
+                  <div class="augment-desc">Your damaging abilities can critically strike</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-prismatic">Prismatic</span>
+                <button class="augment-vote-btn" data-aug="ahri-1" aria-label="Vote for Jeweled Gauntlet">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill prismatic" data-width="96"></div>
+              </div>
+              <span class="augment-vote-count" id="ahri-vote-1">312 votes</span>
+            </div>
+          </div>
+
+          <!-- 2. Spellblade -->
+          <div class="augment-item" id="ahri-aug-2">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank top">2</span>
+                <div>
+                  <div class="augment-name">Spellblade</div>
+                  <div class="augment-desc">After using an ability, empowers next basic attack</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-prismatic">Prismatic</span>
+                <button class="augment-vote-btn" data-aug="ahri-2" aria-label="Vote for Spellblade">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill prismatic" data-width="88"></div>
+              </div>
+              <span class="augment-vote-count" id="ahri-vote-2">287 votes</span>
+            </div>
+          </div>
+
+          <!-- 3. Runic Empowerment -->
+          <div class="augment-item" id="ahri-aug-3">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank">3</span>
+                <div>
+                  <div class="augment-name">Runic Empowerment</div>
+                  <div class="augment-desc">Kills restore a portion of ability cooldowns</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-gold">Gold</span>
+                <button class="augment-vote-btn" data-aug="ahri-3" aria-label="Vote for Runic Empowerment">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill gold" data-width="61"></div>
+              </div>
+              <span class="augment-vote-count" id="ahri-vote-3">198 votes</span>
+            </div>
+          </div>
+
+          <!-- 4. Stormsurge -->
+          <div class="augment-item" id="ahri-aug-4">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank">4</span>
+                <div>
+                  <div class="augment-name">Stormsurge</div>
+                  <div class="augment-desc">High single-target damage triggers a lightning bolt</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-gold">Gold</span>
+                <button class="augment-vote-btn" data-aug="ahri-4" aria-label="Vote for Stormsurge">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill gold" data-width="54"></div>
+              </div>
+              <span class="augment-vote-count" id="ahri-vote-4">176 votes</span>
+            </div>
+          </div>
+
+          <!-- 5. Manaflow Band -->
+          <div class="augment-item" id="ahri-aug-5">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank">5</span>
+                <div>
+                  <div class="augment-name">Mana Surge</div>
+                  <div class="augment-desc">First ability hit each few seconds restores mana</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-silver">Silver</span>
+                <button class="augment-vote-btn" data-aug="ahri-5" aria-label="Vote for Mana Surge">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill silver" data-width="41"></div>
+              </div>
+              <span class="augment-vote-count" id="ahri-vote-5">134 votes</span>
+            </div>
+          </div>
+
+        </div><!-- /augment-list -->
+      </div><!-- /augment-modal-body -->
+    </div><!-- /augment-modal -->
+  </div><!-- /modal-ahri -->
+
+  <!-- =====================================================
+       LUX AUGMENT MODAL
+  ====================================================== -->
+  <div
+    class="augment-modal-overlay"
+    id="modal-lux"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="lux-modal-title"
+  >
+    <div class="augment-modal" id="augment-modal-lux">
+
+      <!-- Header -->
+      <div class="augment-modal-header">
+        <div class="augment-modal-champion">
+          <img
+            src="https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Lux.png"
+            alt="Lux"
+            class="augment-modal-icon"
+          />
+          <div>
+            <div class="augment-modal-title" id="lux-modal-title">Lux — Top Augments</div>
+            <div class="augment-modal-sub">Top-voted BiS picks for ARAM Mayhem</div>
+          </div>
+        </div>
+        <button class="augment-modal-close" id="close-modal-lux" aria-label="Close augment modal">✕</button>
+      </div>
+
+      <!-- Body -->
+      <div class="augment-modal-body">
+        <p class="augment-modal-intro">
+          Lux players have spoken — these augments maximise her global ultimate damage
+          and shield uptime. Prismatic picks are nearly must-haves for full AP builds.
+        </p>
+
+        <div class="augment-list">
+
+          <!-- 1. Jeweled Gauntlet -->
+          <div class="augment-item" id="lux-aug-1">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank top">1</span>
+                <div>
+                  <div class="augment-name">Jeweled Gauntlet</div>
+                  <div class="augment-desc">Your damaging abilities can critically strike</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-prismatic">Prismatic</span>
+                <button class="augment-vote-btn" data-aug="lux-1" aria-label="Vote for Jeweled Gauntlet">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill prismatic" data-width="100"></div>
+              </div>
+              <span class="augment-vote-count" id="lux-vote-1">401 votes</span>
+            </div>
+          </div>
+
+          <!-- 2. Celestial Body -->
+          <div class="augment-item" id="lux-aug-2">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank top">2</span>
+                <div>
+                  <div class="augment-name">Celestial Body</div>
+                  <div class="augment-desc">Gain bonus max health; deal reduced damage early</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-prismatic">Prismatic</span>
+                <button class="augment-vote-btn" data-aug="lux-2" aria-label="Vote for Celestial Body">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill prismatic" data-width="74"></div>
+              </div>
+              <span class="augment-vote-count" id="lux-vote-2">298 votes</span>
+            </div>
+          </div>
+
+          <!-- 3. Glacial Burst -->
+          <div class="augment-item" id="lux-aug-3">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank">3</span>
+                <div>
+                  <div class="augment-name">Glacial Burst</div>
+                  <div class="augment-desc">Immobilising enemies also creates a slowing zone</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-gold">Gold</span>
+                <button class="augment-vote-btn" data-aug="lux-3" aria-label="Vote for Glacial Burst">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill gold" data-width="61"></div>
+              </div>
+              <span class="augment-vote-count" id="lux-vote-3">245 votes</span>
+            </div>
+          </div>
+
+          <!-- 4. Healing Orb -->
+          <div class="augment-item" id="lux-aug-4">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank">4</span>
+                <div>
+                  <div class="augment-name">Healing Orb</div>
+                  <div class="augment-desc">Shielding allies also grants them a small heal</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-gold">Gold</span>
+                <button class="augment-vote-btn" data-aug="lux-4" aria-label="Vote for Healing Orb">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill gold" data-width="47"></div>
+              </div>
+              <span class="augment-vote-count" id="lux-vote-4">189 votes</span>
+            </div>
+          </div>
+
+          <!-- 5. Crystalline Blessing -->
+          <div class="augment-item" id="lux-aug-5">
+            <div class="augment-item-header">
+              <div class="augment-item-left">
+                <span class="augment-rank">5</span>
+                <div>
+                  <div class="augment-name">Crystalline Blessing</div>
+                  <div class="augment-desc">Your root abilities grant a brief shield on hit</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
+                <span class="tier-badge tier-silver">Silver</span>
+                <button class="augment-vote-btn" data-aug="lux-5" aria-label="Vote for Crystalline Blessing">▲ Vote</button>
+              </div>
+            </div>
+            <div class="augment-vote-row">
+              <div class="augment-vote-bar-track">
+                <div class="augment-vote-bar-fill silver" data-width="35"></div>
+              </div>
+              <span class="augment-vote-count" id="lux-vote-5">142 votes</span>
+            </div>
+          </div>
+
+        </div><!-- /augment-list -->
+      </div><!-- /augment-modal-body -->
+    </div><!-- /augment-modal -->
+  </div><!-- /modal-lux -->
+
+  <script src="js/playstyle-tags.js"></script>
+  <script src="js/champions-data.js"></script>
+  <script>
+    /* ─── Populate roster grid (Data Dragon + wiki-aligned list) ─── */
+    (function populateChampionsGrid() {
+      const grid = document.getElementById('championsGrid');
+      if (!grid || typeof ARAM_CHAMPIONS === 'undefined') return;
+
+      function esc(t) {
+        const d = document.createElement('div');
+        d.textContent = t;
+        return d.innerHTML;
+      }
+
+      function roleCls(role) {
+        const m = {
+          mage: 'role-mage',
+          assassin: 'role-assassin',
+          support: 'role-support',
+          tank: 'role-tank',
+          fighter: 'role-fighter',
+          marksman: 'role-marksman',
+        };
+        return m[role] || 'role-fighter';
+      }
+
+      const FEAT = {
+        ahri: {
+          lore: 'In ARAM Mayhem, Ahri thrives — darting through ability-packed corridors, charming picks, and resetting her ultimate to chase survivors.',
+          wr: 58,
+          wrCls: 'neutral',
+          dmg: 'Magic',
+          diff: 3,
+          pick: 14.2,
+          builds: 32,
+          progExtra: '',
+        },
+        lux: {
+          lore: "Lux's long-range poke and global ultimate make her a top-tier ARAM pick — full AP or shielding support, she shapes every teamfight.",
+          wr: 62,
+          wrCls: 'positive',
+          dmg: 'Magic',
+          diff: 2,
+          pick: 18.9,
+          builds: 41,
+          progExtra: 'progress-fill--lux',
+        },
+      };
+
+      const list = ARAM_CHAMPIONS.slice();
+
+      const bar = document.getElementById('championPlaystyleFilterBar');
+      if (bar && typeof ARAM_ROLE_TAG_LIST !== 'undefined' && typeof ARAM_PLAYSTYLE_TAG_LIST !== 'undefined') {
+        const roleBtns = ARAM_ROLE_TAG_LIST.map((t) => {
+          const n = ARAM_CHAMPIONS.filter((ch) => {
+            if (ch.roles.includes(t.slug)) return true;
+            return (ch.playstyleTags || []).includes(t.slug);
+          }).length;
+          return `<button type="button" class="filter-btn filter-btn--role" data-filter="${esc(t.slug)}"><span class="filter-btn-role-label">${esc(t.label)}</span> <span class="filter-count">${n}</span></button>`;
+        }).join('');
+        const playBtns = ARAM_PLAYSTYLE_TAG_LIST.map((t) => {
+          const n = ARAM_CHAMPIONS.filter((ch) => (ch.playstyleTags || []).includes(t.slug)).length;
+          return `<button type="button" class="filter-btn filter-btn--playstyle" data-playstyle="${esc(t.slug)}">${esc(t.label)} <span class="filter-count">${n}</span></button>`;
+        }).join('');
+        bar.innerHTML = '<span class="filter-label">Tags:</span>' + roleBtns + playBtns;
+      }
+
+      grid.innerHTML = list
+        .map((c, idx) => {
+          const f = FEAT[c.id];
+          const rolesAttr = c.roles.join(' ');
+          const ps = c.playstyleTags || [];
+          const psAttr = esc(ps.join(' '));
+          const tagsHtml = c.tags
+            .map((tag, i) => `<span class="role-tag ${roleCls(c.roles[i] ?? c.roles[0])}">${esc(tag)}</span>`)
+            .join('');
+          const chipSpans = ps
+            .slice(0, 6)
+            .map((slug) => {
+              const m = typeof ARAM_BUILD_TAG_BY_SLUG !== 'undefined' && ARAM_BUILD_TAG_BY_SLUG[slug];
+              const lb = m ? m.label : slug;
+              const isRole = m && m.category === 'role';
+              const cls = isRole ? 'playstyle-chip playstyle-chip--role' : 'playstyle-chip';
+              return `<span class="${cls}">${esc(lb)}</span>`;
+            })
+            .join('');
+          const chipsHtml = chipSpans
+            ? `<div class="champ-playstyle-chips" aria-label="Champion tags">${chipSpans}</div>`
+            : '';
+          const titleLine = `The ${esc(c.title)}`;
+          const lore = f
+            ? f.lore
+            : `Build guides and ARAM Mayhem tips for ${esc(c.name)} — open the detail page to browse or submit a guide.`;
+          const wrPct = f ? `${f.wr}%` : '—';
+          const wrSpanCls = f ? `champ-win-pct ${f.wrCls}` : 'champ-win-pct neutral';
+          const prog = f
+            ? `<div class="progress-bar"><div class="progress-fill ${f.progExtra}" data-width="${f.wr}"></div></div>`
+            : '';
+          const dmg = f ? f.dmg : '—';
+          const diffFilled = f ? f.diff : 0;
+          const diffEmpty = f ? 5 - f.diff : 5;
+          const diffStars = f
+            ? `${'<span class="difficulty-star filled" aria-hidden="true">★</span>'.repeat(diffFilled)}${'<span class="difficulty-star" aria-hidden="true">★</span>'.repeat(diffEmpty)}`
+            : '<span class="difficulty-star" aria-hidden="true">★</span>'.repeat(5);
+          const pick = f ? `${f.pick}%` : '—';
+          const builds = f ? String(f.builds) : '—';
+          const loadImg = idx < 4 ? 'eager' : 'lazy';
+
+          return `
+        <a
+          href="champion-detail.html?champion=${esc(c.id)}"
+          class="champion-full-card reveal"
+          id="card-${esc(c.id)}"
+          data-roles="${esc(rolesAttr)}"
+          data-playstyle-tags="${psAttr}"
+          data-champion-search="${esc(c.name.toLowerCase())}"
+          aria-label="View ${esc(c.name)} builds"
+        >
+          <div class="champ-splash-panel">
+            <img src="${esc(c.loading)}" alt="${esc(c.name)} — ${titleLine}" loading="${loadImg}" />
+          </div>
+          <div class="champ-info-panel">
+            <div class="champ-info-header">
+              <div>
+                <h2 class="champ-full-name">${esc(c.name)}</h2>
+                <p class="champ-full-title">${titleLine}</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:4px;">
+                  ${tagsHtml}
+                </div>
+                ${chipsHtml}
+              </div>
+              <div class="champ-aram-badge">❄ ARAM Mayhem</div>
+            </div>
+            <blockquote class="champ-lore">&quot;${lore}&quot;</blockquote>
+            <div class="champ-stats-grid">
+              <div class="champ-stat-item">
+                <div class="champ-stat-label">ARAM Win Rate</div>
+                <div class="champ-win-rate">
+                  <div class="champ-win-rate-header">
+                    <span class="${wrSpanCls}">${wrPct}</span>
+                  </div>
+                  ${prog}
+                </div>
+              </div>
+              <div class="champ-stat-item">
+                <div class="champ-stat-label">Damage Type</div>
+                <div class="champ-stat-value neutral">${esc(dmg)}</div>
+              </div>
+              <div class="champ-stat-item">
+                <div class="champ-stat-label">Difficulty</div>
+                <div class="difficulty-stars" aria-hidden="true">${diffStars}</div>
+              </div>
+              <div class="champ-stat-item">
+                <div class="champ-stat-label">Pick Rate</div>
+                <div class="champ-stat-value ${f ? 'positive' : 'neutral'}">${esc(pick)}</div>
+              </div>
+              <div class="champ-stat-item">
+                <div class="champ-stat-label">Builds</div>
+                <div class="champ-stat-value">${esc(builds)}</div>
+              </div>
+            </div>
+            <div class="champ-card-actions">
+              <span class="btn btn-primary">View ${esc(c.name)} Builds →</span>
+              <span class="champ-build-count">
+                ${f ? `<strong>${String(f.builds)}</strong> builds submitted` : '<span style="opacity:.88;">Open the page to browse or submit a build</span>'}
+              </span>
+            </div>
+          </div>
+        </a>`;
+        })
+        .join('');
+    })();
+  </script>
+  <script src="js/main.js"></script>
+  <script>
+    /* ─── Champions: search + autocomplete + tag filters (role + playstyle) ─ */
+    (function () {
+      const filterBtns = document.querySelectorAll('.filter-btn[data-filter]');
+      const playstyleBtns = document.querySelectorAll('.filter-btn[data-playstyle]');
+      const cards = document.querySelectorAll('.champion-full-card');
+      const noResults = document.getElementById('noResultsMsg');
+      const searchInput = document.getElementById('championSearchInput');
+      const searchDropdown = document.getElementById('championSearchResults');
+      const MAX_SUGGESTIONS = 12;
+
+      let highlightIndex = -1;
+      let lastMatches = [];
+
+      function escAttr(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      }
+
+      function getMatchesForQuery(raw) {
+        const ql = raw.trim().toLowerCase();
+        if (!ql || typeof ARAM_CHAMPIONS === 'undefined') return [];
+        const prefix = [];
+        const contains = [];
+        const seen = new Set();
+        for (let i = 0; i < ARAM_CHAMPIONS.length; i++) {
+          const c = ARAM_CHAMPIONS[i];
+          const n = c.name.toLowerCase();
+          if (n.startsWith(ql)) {
+            prefix.push(c);
+            seen.add(c.id);
+          }
+        }
+        for (let j = 0; j < ARAM_CHAMPIONS.length; j++) {
+          const c = ARAM_CHAMPIONS[j];
+          if (seen.has(c.id)) continue;
+          const n = c.name.toLowerCase();
+          if (n.includes(ql)) contains.push(c);
+        }
+        return prefix.concat(contains).slice(0, MAX_SUGGESTIONS);
+      }
+
+      function setDropdownOpen(open) {
+        if (!searchInput || !searchDropdown) return;
+        searchInput.setAttribute('aria-expanded', open ? 'true' : 'false');
+        searchDropdown.hidden = !open;
+        const filterBar = document.getElementById('filterBar');
+        const combo = document.getElementById('championSearchCombobox');
+        if (filterBar) filterBar.classList.toggle('filter-bar--dropdown-open', open);
+        if (combo) combo.classList.toggle('is-open', open);
+      }
+
+      function renderDropdown(matches) {
+        if (!searchDropdown) return;
+        lastMatches = matches;
+        highlightIndex = matches.length ? 0 : -1;
+        if (!matches.length) {
+          searchDropdown.innerHTML = '';
+          return;
+        }
+        searchDropdown.innerHTML = matches
+          .map((c, i) => {
+            const hi = i === highlightIndex ? ' champion-search-option--highlight' : '';
+            return `<li role="option" id="champion-search-opt-${escAttr(c.id)}" class="champion-search-option${hi}" data-champion-id="${escAttr(c.id)}" data-champion-name="${escAttr(c.name)}" aria-selected="${i === highlightIndex ? 'true' : 'false'}"><img src="${escAttr(c.icon)}" alt="" width="32" height="32" loading="lazy" /><span class="champion-search-option-name">${escAttr(c.name)}</span></li>`;
+          })
+          .join('');
+        syncHighlightClasses();
+      }
+
+      function syncHighlightClasses() {
+        if (!searchDropdown) return;
+        const opts = searchDropdown.querySelectorAll('.champion-search-option');
+        opts.forEach((el, i) => {
+          const on = i === highlightIndex;
+          el.classList.toggle('champion-search-option--highlight', on);
+          el.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
+
+      function updateDropdownFromInput() {
+        if (!searchInput || !searchDropdown) return;
+        const raw = searchInput.value;
+        const q = raw.trim();
+        if (!q) {
+          searchDropdown.innerHTML = '';
+          lastMatches = [];
+          highlightIndex = -1;
+          setDropdownOpen(false);
+          return;
+        }
+        const matches = getMatchesForQuery(raw);
+        renderDropdown(matches);
+        setDropdownOpen(matches.length > 0);
+      }
+
+      const ROLE_SLUG_SET = new Set(
+        (typeof ARAM_ROLE_TAG_LIST !== 'undefined' ? ARAM_ROLE_TAG_LIST : []).map((t) => t.slug)
+      );
+
+      function cardMatchesRoleFilter(card, roleFilter) {
+        if (!roleFilter) return true;
+        const roleParts = (card.getAttribute('data-roles') || '').split(/\s+/).filter(Boolean);
+        if (roleParts.includes(roleFilter)) return true;
+        if (!ROLE_SLUG_SET.has(roleFilter)) return false;
+        const playTags = (card.getAttribute('data-playstyle-tags') || '').split(/\s+/).filter(Boolean);
+        return playTags.includes(roleFilter);
+      }
+
+      function applyFilters() {
+        const q = (searchInput && searchInput.value ? searchInput.value : '').trim().toLowerCase();
+        const activeBtn = document.querySelector('.filter-btn[data-filter].active');
+        const roleFilter = activeBtn ? activeBtn.getAttribute('data-filter') : null;
+        const activePlay = document.querySelector('.filter-btn[data-playstyle].active');
+        const playFilter = activePlay ? activePlay.getAttribute('data-playstyle') : null;
+
+        let visible = 0;
+        cards.forEach((card) => {
+          const searchBlob = (card.getAttribute('data-champion-search') || '').toLowerCase();
+          const playTags = (card.getAttribute('data-playstyle-tags') || '').split(/\s+/).filter(Boolean);
+          const roleOk = cardMatchesRoleFilter(card, roleFilter);
+          const searchOk = !q || searchBlob.includes(q);
+          const playOk = !playFilter || playTags.includes(playFilter);
+          const show = roleOk && searchOk && playOk;
+          card.classList.toggle('hidden', !show);
+          if (show) visible++;
+        });
+        if (noResults) noResults.style.display = visible === 0 ? 'block' : 'none';
+      }
+
+      function selectChampionFromDropdown(id, name) {
+        if (searchInput) searchInput.value = name;
+        setDropdownOpen(false);
+        searchDropdown.innerHTML = '';
+        lastMatches = [];
+        highlightIndex = -1;
+        applyFilters();
+        const card = document.getElementById('card-' + id);
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const wasActive = btn.classList.contains('active');
+          filterBtns.forEach((b) => b.classList.remove('active'));
+          if (!wasActive) btn.classList.add('active');
+          applyFilters();
+        });
+      });
+
+      playstyleBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const wasActive = btn.classList.contains('active');
+          playstyleBtns.forEach((b) => b.classList.remove('active'));
+          if (!wasActive) btn.classList.add('active');
+          applyFilters();
+        });
+      });
+
+      if (searchInput && searchDropdown) {
+        searchInput.addEventListener('input', () => {
+          applyFilters();
+          updateDropdownFromInput();
+        });
+
+        searchInput.addEventListener('focus', () => {
+          updateDropdownFromInput();
+        });
+
+        searchInput.addEventListener('keydown', (e) => {
+          const open = !searchDropdown.hidden && lastMatches.length > 0;
+          if (e.key === 'Escape') {
+            setDropdownOpen(false);
+            searchDropdown.innerHTML = '';
+            lastMatches = [];
+            highlightIndex = -1;
+            return;
+          }
+          if (!open) return;
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            highlightIndex = Math.min(highlightIndex + 1, lastMatches.length - 1);
+            syncHighlightClasses();
+            const hiEl = searchDropdown.querySelector('.champion-search-option--highlight');
+            hiEl?.scrollIntoView({ block: 'nearest' });
+          } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            highlightIndex = Math.max(highlightIndex - 1, 0);
+            syncHighlightClasses();
+            const hiEl = searchDropdown.querySelector('.champion-search-option--highlight');
+            hiEl?.scrollIntoView({ block: 'nearest' });
+          } else if (e.key === 'Enter' && highlightIndex >= 0 && lastMatches[highlightIndex]) {
+            e.preventDefault();
+            const c = lastMatches[highlightIndex];
+            selectChampionFromDropdown(c.id, c.name);
+          }
+        });
+
+        searchDropdown.addEventListener('mousedown', (e) => {
+          const opt = e.target.closest('.champion-search-option');
+          if (!opt) return;
+          e.preventDefault();
+          const id = opt.getAttribute('data-champion-id');
+          const name = opt.getAttribute('data-champion-name');
+          if (id && name) selectChampionFromDropdown(id, name);
+        });
+
+        document.addEventListener('click', (e) => {
+          const combo = document.getElementById('championSearchCombobox');
+          if (combo && !combo.contains(e.target)) {
+            setDropdownOpen(false);
+          }
+        });
+      }
+    })();
+
+    /* ─── Augment Modal Logic ─────────────────────────────── */
+    (function () {
+
+      /* Open helpers */
+      function openModal(overlayId) {
+        const overlay = document.getElementById(overlayId);
+        if (!overlay) return;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        /* Animate the vote bar fills once per open */
+        overlay.querySelectorAll('.augment-vote-bar-fill[data-width]').forEach(bar => {
+          bar.style.width = bar.getAttribute('data-width') + '%';
+        });
+        /* Focus the close button for keyboard accessibility */
+        const closeBtn = overlay.querySelector('.augment-modal-close');
+        if (closeBtn) setTimeout(() => closeBtn.focus(), 50);
+      }
+
+      function closeModal(overlayId) {
+        const overlay = document.getElementById(overlayId);
+        if (!overlay) return;
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+        /* Reset bar widths so they re-animate next open */
+        overlay.querySelectorAll('.augment-vote-bar-fill[data-width]').forEach(bar => {
+          bar.style.width = '0';
+        });
+      }
+
+      /* Ahri trigger */
+      const ahriTrigger = document.getElementById('ahri-augment-trigger');
+      if (ahriTrigger) {
+        ahriTrigger.addEventListener('click', () => openModal('modal-ahri'));
+        ahriTrigger.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal('modal-ahri'); }
+        });
+      }
+
+      /* Lux trigger */
+      const luxTrigger = document.getElementById('lux-augment-trigger');
+      if (luxTrigger) {
+        luxTrigger.addEventListener('click', () => openModal('modal-lux'));
+        luxTrigger.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal('modal-lux'); }
+        });
+      }
+
+      /* Close buttons */
+      document.getElementById('close-modal-ahri')?.addEventListener('click', () => closeModal('modal-ahri'));
+      document.getElementById('close-modal-lux')?.addEventListener('click',  () => closeModal('modal-lux'));
+
+      /* Click outside to close */
+      ['modal-ahri', 'modal-lux'].forEach(id => {
+        const overlay = document.getElementById(id);
+        if (!overlay) return;
+        overlay.addEventListener('click', e => {
+          if (e.target === overlay) closeModal(id);
+        });
+      });
+
+      /* Escape key closes any open modal */
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          ['modal-ahri', 'modal-lux'].forEach(id => closeModal(id));
+        }
+      });
+
+      /* ─── Augment Vote Buttons ──────────────────────────── */
+      document.querySelectorAll('.augment-vote-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const augKey   = btn.getAttribute('data-aug');        // e.g. "ahri-1"
+          const parts    = augKey.split('-');                   // ["ahri", "1"]
+          const champ    = parts[0];                            // "ahri"
+          const num      = parts[1];                            // "1"
+          const countEl  = document.getElementById(champ + '-vote-' + num);
+          if (!countEl) return;
+
+          const isVoted  = btn.classList.toggle('voted');
+          const rawText  = countEl.textContent.trim();          // "312 votes"
+          const current  = parseInt(rawText, 10);
+
+          if (isVoted) {
+            btn.textContent = '▲ Voted';
+            countEl.textContent = (current + 1).toLocaleString() + ' votes';
+          } else {
+            btn.textContent = '▲ Vote';
+            countEl.textContent = (current - 1).toLocaleString() + ' votes';
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

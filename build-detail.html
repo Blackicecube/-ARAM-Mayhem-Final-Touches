@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Build Guide — ARAM Bound</title>
+  <meta name="description" content="Detailed ARAM Mayhem build guide with item path, augment recommendations, and practical tips." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Item icon row ───────────────────────────── */
+    .bd-item-icon-row { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
+    .bd-item-icon-slot { position:relative; display:inline-flex; flex-direction:column; align-items:center; gap:4px; }
+    .bd-item-icon-slot img { width:60px; height:60px; border-radius:9px; border:1px solid rgba(255,255,255,.12); object-fit:cover; background:#0a0e1a; display:block; }
+    .bd-item-icon-slot img.bd-icon-err { opacity:.35; filter:grayscale(1); }
+    .bd-item-icon-slot .bd-item-icon-name { font-size:.6rem; color:var(--text-muted,#8a9bb5); font-family:var(--font-ui); text-align:center; max-width:72px; line-height:1.2; }
+    .bd-item-icon-arrow { color:var(--text-muted,#8a9bb5); font-size:.9rem; align-self:center; margin-bottom:20px; }
+    /* ── Augment tier groups ─────────────────────── */
+    .bd-aug-tiers { display:flex; flex-direction:column; gap:20px; }
+    .bd-aug-tier { border-radius:10px; padding:16px 18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.07); }
+    .bd-aug-tier-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .bd-aug-tier-badge { font-size:.7rem; font-weight:800; letter-spacing:.1em; text-transform:uppercase; font-family:var(--font-ui); padding:3px 10px; border-radius:20px; }
+    .bd-aug-tier-badge.tier-silver { background:rgba(148,163,184,.15); color:#94a3b8; border:1px solid rgba(148,163,184,.3); }
+    .bd-aug-tier-badge.tier-gold   { background:rgba(200,155,60,.15);  color:#c89b3c; border:1px solid rgba(200,155,60,.3); }
+    .bd-aug-tier-badge.tier-prismatic { background:rgba(167,139,250,.15); color:#a78bfa; border:1px solid rgba(167,139,250,.3); }
+    .bd-aug-tier-combo { font-size:.75rem; font-family:var(--font-ui); color:var(--text-muted,#8a9bb5); margin-left:auto; font-style:italic; }
+    .bd-aug-tier-combo strong { color:var(--text-secondary,#c7d3e8); font-style:normal; }
+    .bd-aug-picks { display:flex; gap:12px; flex-wrap:wrap; }
+    .bd-aug-pick { display:flex; flex-direction:column; align-items:center; gap:5px; width:76px; }
+    .bd-aug-pick-icon { width:60px; height:60px; border-radius:9px; object-fit:cover; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.10); display:block; }
+    .bd-aug-pick-icon.bd-icon-err { opacity:.35; filter:grayscale(1); }
+    .bd-aug-pick-name { font-size:.6rem; color:var(--text-muted,#8a9bb5); font-family:var(--font-ui); text-align:center; line-height:1.25; max-width:76px; }
+    /* ── BiS combo banner ────────────────────────── */
+    .bd-bis-combo-banner { display:flex; align-items:center; gap:10px; margin-bottom:18px; background:rgba(200,155,60,.07); border:1px solid rgba(200,155,60,.2); border-radius:10px; padding:12px 16px; flex-wrap:wrap; }
+    .bd-bis-combo-label { font-size:.7rem; font-weight:800; letter-spacing:.1em; color:var(--gold,#c89b3c); text-transform:uppercase; font-family:var(--font-ui); white-space:nowrap; }
+    .bd-bis-combo-text { font-size:.82rem; font-family:var(--font-ui); color:var(--text-primary,#e8eaf0); font-weight:600; }
+    /* ── Top 4 BiS chase (compact) ───────────────── */
+    .bd-aug-bis-chase {
+      margin-bottom: 22px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: rgba(200, 155, 60, 0.06);
+      border: 1px solid rgba(200, 155, 60, 0.22);
+    }
+    .bd-aug-bis-chase-head {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold, #c89b3c);
+      font-family: var(--font-ui);
+      margin-bottom: 10px;
+    }
+    .bd-aug-bis-chase-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .bd-aug-bis-chase-pick { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 76px; }
+    .bd-aug-bis-chase-pick .bd-aug-bis-chase-icon {
+      width: 56px; height: 56px; border-radius: 10px; object-fit: cover;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+    }
+    .bd-aug-bis-chase-pick .bd-aug-bis-chase-icon.bd-icon-err { opacity: .4; filter: grayscale(1); }
+    .bd-aug-bis-chase-pick .bd-aug-bis-chase-name { font-size: 0.55rem; color: var(--text-muted,#8a9bb5); text-align: center; line-height: 1.2; max-width: 76px; font-family: var(--font-ui); }
+    .bd-aug-bis-chase-pick .bd-aug-bis-chase-sl {
+      font-size: 0.5rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.2;
+      min-height: 1.2em;
+    }
+    .bd-aug-subhead { font-size: 0.78rem; font-weight: 700; color: var(--text-secondary,#c7d3e8); margin: 0 0 12px 0; font-family: var(--font-ui); letter-spacing: 0.04em; }
+    .bd-aug-pick--tall {
+      min-height: 102px;
+      position: relative;
+      padding-top: 6px;
+      box-sizing: border-box;
+    }
+    .bd-aug-slot-label { font-size: 0.5rem; font-weight: 800; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 2px; }
+    .bd-aug-pick--empty { opacity: 0.45; }
+    .bd-aug-pick--empty .bd-aug-pick-name { font-style: italic; }
+    .bd-aug-pick--bis {
+      box-shadow: inset 0 0 0 2px rgba(200, 155, 60, 0.55);
+      border-radius: 10px;
+    }
+    .bd-aug-pick-bis-badge {
+      position: absolute;
+      top: 2px;
+      right: 4px;
+      font-size: 0.45rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold, #c89b3c);
+      background: rgba(200, 155, 60, 0.15);
+      border: 1px solid rgba(200, 155, 60, 0.45);
+      border-radius: 4px;
+      padding: 2px 5px;
+      font-family: var(--font-ui);
+    }
+    /* ── YouTube phase blocks ───────────────────── */
+    .bd-youtube-phases { display: flex; flex-direction: column; gap: 28px; }
+    .bd-youtube-phase { border-radius: 12px; padding: 16px 18px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); }
+    .bd-youtube-phase-title { font-size: 0.95rem; font-weight: 800; margin: 0 0 4px 0; color: var(--text-primary,#e8eaf0); font-family: var(--font-ui); }
+    .bd-youtube-phase-hint { font-size: 0.72rem; color: var(--text-muted,#8a9bb5); margin: 0 0 8px 0; line-height: 1.4; }
+    .bd-youtube-phase-range { font-size: 0.7rem; font-family: var(--font-ui); color: var(--ice, #4fc3f7); margin: 0 0 10px 0; }
+    .bd-youtube-phase-range code { font-size: 0.68rem; background: rgba(0,0,0,.25); padding: 2px 6px; border-radius: 4px; }
+    .bd-youtube-embed { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #0a0e1a; }
+    .bd-youtube-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .bd-youtube-phase--empty { opacity: 0.55; }
+    .bd-youtube-phase-empty-note { font-size: 0.8rem; color: var(--text-muted); margin: 0; font-style: italic; }
+    /* ── Summoner spells ─────────────────────────── */
+    .bd-summoner-row { display:flex; gap:14px; flex-wrap:wrap; align-items:flex-start; }
+    .bd-summoner-slot { display:flex; flex-direction:column; align-items:center; gap:5px; }
+    .bd-summoner-icon { width:48px; height:48px; border-radius:8px; object-fit:cover; border:1px solid rgba(255,255,255,.12); background:#0a0e1a; display:block; }
+    .bd-summoner-icon.bd-icon-err { opacity:.35; }
+    .bd-summoner-name { font-size:.65rem; color:var(--text-muted,#8a9bb5); font-family:var(--font-ui); text-align:center; max-width:56px; line-height:1.2; }
+    /* Delete build button — danger style, only shown for user builds */
+    .bd-delete-wrap {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(248,113,113,0.15);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-danger {
+      background: transparent;
+      border: 1px solid rgba(248,113,113,0.45);
+      color: #f87171;
+      font-family: var(--font-ui);
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 8px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.18s, border-color 0.18s;
+      letter-spacing: .04em;
+    }
+    .btn-danger:hover {
+      background: rgba(248,113,113,0.1);
+      border-color: #f87171;
+    }
+    /* Confirmation state */
+    .bd-delete-confirm {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      background: rgba(248,113,113,0.07);
+      border: 1px solid rgba(248,113,113,0.25);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: .82rem;
+      color: #f87171;
+      font-family: var(--font-ui);
+      font-weight: 600;
+    }
+    .bd-delete-confirm span { flex: 1; min-width: 160px; }
+    .bd-delete-confirm-yes {
+      background: #f87171;
+      color: #0a0e1a;
+      border: none;
+      border-radius: 7px;
+      padding: 7px 16px;
+      font-weight: 700;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: background 0.15s;
+    }
+    .bd-delete-confirm-yes:hover { background: #fca5a5; }
+    .bd-delete-confirm-no {
+      background: transparent;
+      color: var(--text-muted, #8a9bb5);
+      border: 1px solid var(--border, rgba(255,255,255,.08));
+      border-radius: 7px;
+      padding: 7px 14px;
+      font-size: .8rem;
+      cursor: pointer;
+      font-family: var(--font-ui);
+      transition: border-color 0.15s;
+    }
+    .bd-delete-confirm-no:hover { border-color: var(--ice, #4fc3f7); color: var(--ice, #4fc3f7); }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">⚔</span>
+        <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"     class="nav-link" id="nav-home">Home</a></li>
+        <li><a href="champions.html" class="nav-link" id="nav-champions">Champions</a></li>
+        <li><a href="builds.html"    class="nav-link active" id="nav-builds">Builds</a></li>
+      </ul>
+      <div class="nav-search-wrap" id="navSearchWrap">
+        <input type="search" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" />
+        <button type="button" class="nav-search-submit" id="navSearchBtn" aria-label="Search">&#x1F50D;</button>
+      </div>
+      <div class="nav-actions">
+        <a href="create.html" class="btn btn-primary" id="nav-submit-btn">+ Submit Build</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header class="bd-hero" id="bd-hero">
+    <div class="bd-hero-bg" id="bd-hero-bg"></div>
+    <div class="bd-hero-inner">
+      <img class="bd-splash" id="bd-splash" src="" alt="" />
+      <div class="bd-hero-text">
+        <nav class="bd-hero-breadcrumb">
+          <a href="builds.html">Builds</a> › <span id="bd-breadcrumb-champ"></span> › <span id="bd-breadcrumb-title"></span>
+        </nav>
+        <h1 class="bd-build-title" id="bd-build-title">Loading…</h1>
+        <div class="bd-hero-meta">
+          <span class="bd-hero-author">by <strong id="bd-author"></strong></span>
+          <span class="bd-hero-patch" id="bd-patch"></span>
+          <span class="bd-hero-stars" id="bd-stars"></span>
+          <span class="bd-hero-author" id="bd-rating-text"></span>
+        </div>
+        <div class="bd-hero-tags" id="bd-tags"></div>
+      </div>
+      <div class="bd-hero-vote">
+        <button class="feed-vote-btn" id="bd-vote-btn" aria-label="Upvote">▲</button>
+        <span class="feed-vote-count" id="bd-votes"></span>
+        <div class="feed-spicy-vote" style="margin-top:6px;">
+          <button class="feed-spicy-btn" id="bd-spicy-btn" aria-label="Mark as Spicy">🌶️</button>
+          <span class="feed-spicy-count" id="bd-spicy-count">0</span>
+          <div class="feed-spice-level" id="bd-spice-level"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PAGE BODY -->
+  <div class="bd-page" id="bd-page">
+
+    <!-- 1. OVERVIEW -->
+    <section class="bd-section" id="section-overview">
+      <h2 class="bd-section-title">📋 Overview</h2>
+      <blockquote class="bd-description" id="bd-description"></blockquote>
+    </section>
+
+    <!-- 2. ITEM BUILD PATH -->
+    <section class="bd-section" id="section-items">
+      <h2 class="bd-section-title">⚔ Item Build Path</h2>
+      <p id="bd-core-path-usecase" style="font-size:.88rem;color:var(--text-secondary,#c7d3e8);margin:0 0 14px 0;max-width:800px;line-height:1.55;"></p>
+      <div class="bd-items-path" id="bd-items-path"></div>
+      <div id="bd-item-alt-paths" style="margin-top:20px;"></div>
+      <p style="font-size:.75rem;color:var(--text-muted);margin-top:12px;" id="bd-items-note"></p>
+    </section>
+
+    <!-- 3. SUMMONERS -->
+    <section class="bd-section" id="section-summoners">
+      <h2 class="bd-section-title">⚡ Summoners</h2>
+      <div class="bd-summoner-row" id="bd-spells"></div>
+    </section>
+
+    <!-- 4. AUGMENT RECOMMENDATIONS -->
+    <section class="bd-section" id="section-augments">
+      <h2 class="bd-section-title">✦ Augment Recommendations</h2>
+      <p class="bd-augment-intro" id="bd-augment-intro">The <strong>Top 4 BiS</strong> strip lists augments you checked as BiS on the create page (up to four checked total across the grid). <strong>All tier picks</strong> shows every slot (<strong>P1–P4</strong>, <strong>G1–G4</strong>, <strong>S1–S4</strong>); ring + tag = BiS.</p>
+      <div id="bd-augment-bis-chase" class="bd-aug-bis-chase" hidden></div>
+      <div id="bd-augment-bis-banner"></div>
+      <h3 class="bd-aug-subhead" id="bd-augment-all-heading">All tier picks</h3>
+      <div class="bd-aug-tiers bd-aug-tiers--all-picks" id="bd-augment-tiers"></div>
+    </section>
+
+    <!-- 5. GAMEPLAY VIDEO -->
+    <section class="bd-section" id="section-video">
+      <h2 class="bd-section-title">🎬 Gameplay highlights</h2>
+      <p class="bd-video-section-lead" style="font-size:.85rem;color:var(--text-muted,#8a9bb5);max-width:820px;line-height:1.5;margin:0 0 18px 0;">
+        Each block is a separate embed. When you set <strong>clip start</strong> and <strong>clip end</strong> on the create page, the player starts at that time and stops at the end (YouTube embed).
+      </p>
+      <div id="bd-youtube-phases" class="bd-youtube-phases"></div>
+    </section>
+
+    <!-- 6. COMMENTS -->
+    <section class="bd-section" id="section-comments">
+      <h2 class="bd-section-title" id="bd-comments-title">💬 Comments</h2>
+      <div class="bd-comment-form">
+        <textarea id="bd-comment-input" placeholder="Share your experience, ask a question, or suggest improvements…"></textarea>
+        <div class="bd-comment-form-actions">
+          <button class="btn btn-primary btn-sm" id="bd-comment-submit">Post Comment</button>
+        </div>
+      </div>
+      <div class="bd-comments-list" id="bd-comments-list"></div>
+    </section>
+
+  </div>
+
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo footer-logo">
+            <span class="logo-icon">⚔</span>
+            <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+          </a>
+          <p class="footer-tagline">The premier resource for ARAM Mayhem players.</p>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="builds.html">Builds</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">ARAM Bound is a fan-made site not affiliated with Riot Games. League of Legends © Riot Games, Inc.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  /* ============================================================
+     USER BUILDS — merge from localStorage before lookup
+  ============================================================ */
+  (function mergeUserBuilds() {
+    try {
+      const stored = JSON.parse(localStorage.getItem('arambound_user_builds') || '{}');
+      Object.assign(window._userBuilds = window._userBuilds || {}, stored);
+    } catch {}
+  })();
+
+  /* ============================================================
+     BUILD DATA
+  ============================================================ */
+  const BUILDS = {
+    'lux-1': {
+      championKey:'lux',
+      buildTag:'mage',
+      buildTagLabel:'Mage',
+      playstyleTag:'mage',
+      playstyleLabel:'Mage',
+      champName:'Lux', champRole:'Mage · Support',
+      champImg:'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Lux_0.jpg',
+      champIcon:'https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Lux.png',
+      title:'Full AP Burst Lux — One-Shot Everything',
+      author:'IceBridgeCarry', authorInitial:'I', patch:'14.8',
+      rating:4.7, votes:234, spicy:0,
+      tags:['Lux','Mage','New!'],
+      description:'Max Shadowflame into Rabadon\'s for absurd burst. With Jeweled Gauntlet, your R crits for nearly 3× AP damage on a single target. Position safely behind your team — Q to lock, then E→R for the instant kill.',
+      strengths:['Enormous single-target burst','Safe poke range','Scales massively into late game'],
+      weaknesses:['Requires landing skillshots','No mobility','Hard countered by shields'],
+      difficulty:'Hard',
+      items:['Shadowflame',"Rabadon's Deathcap",'Void Staff','Cryptbloom',"Zhonya's Hourglass",'Horizon Focus'],
+      itemIds:['4645','3089','3135','3137','3157','4628'],
+      itemsNote:'Rush Shadowflame every game. Against heavy MR, swap Cryptbloom → Void Staff second.',
+      itemPaths:{
+        main:{
+          usecase:'Best when the enemy team mixes squishies you can blow up — AP assassin tempo matters more than sustained poke.',
+          notes:'Rush Shadowflame every game. Against heavy MR, swap Cryptbloom → Void Staff second.',
+        },
+        alternates:[],
+      },
+      spells:['Flash','Ignite'],
+      augmentPicks:{
+        prismatic:[
+          { name:'Jeweled Gauntlet', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Jeweled_Gauntlet_mayhem_augment.png' },
+          { name:'Infernal Conduit', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Infernal_Conduit_mayhem_augment.png' },
+          { name:'Glass Cannon', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Glass_Cannon_mayhem_augment.png' },
+          { name:'Eureka', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Eureka_mayhem_augment.png' }
+        ],
+        gold:[
+          { name:'Phenomenal Evil', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Phenomenal_Evil_mayhem_augment.png' },
+          { name:'Magic Missile', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Magic_Missile_mayhem_augment.png' },
+          { name:'Big Brain', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Big_Brain_mayhem_augment.png' },
+          { name:'Lightning Strikes', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Lightning_Strikes_mayhem_augment.png' }
+        ],
+        silver:[
+          { name:'ADAPt', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/ADAPt_mayhem_augment.png' },
+          { name:'Deft', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Deft_mayhem_augment.png' },
+          { name:'Goredrink', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Goredrink_mayhem_augment.png' },
+          { name:'Blunt Force', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Blunt_Force_mayhem_augment.png' }
+        ]
+      },
+      bisChaseRefs:['prismatic:0','gold:0','gold:2','silver:0'],
+      videoUrl:'https://www.youtube-nocookie.com/embed/BGtROe-4-0Y?rel=0',
+      comments:[
+        {author:'NineTailsGG',initial:'N',time:'2 days ago',text:'First game with this I went 18/3. Jeweled Gauntlet augment completely changes the damage ceiling.',votes:14},
+        {author:'GalacticAbyss',initial:'G',time:'1 day ago',text:'Against tanks do you rush Void Staff first? Wondering if Shadowflame is always correct.',votes:7},
+        {author:'IceBridgeCarry',initial:'I',time:'18 hrs ago',text:'Against heavy MR teams I move Void Staff to 2nd and Horizon Focus to 5th. Shadowflame first is still almost always right for the crit passive.',votes:11}
+      ]
+    },
+    'jinx-1': {
+      championKey:'jinx',
+      buildTag:'marksman',
+      buildTagLabel:'Marksman',
+      playstyleTag:'marksman',
+      playstyleLabel:'Marksman',
+      champName:'Jinx', champRole:'Marksman',
+      champImg:'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Jinx_0.jpg',
+      champIcon:'https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Jinx.png',
+      title:'Rocket Rampage — Crit & Reset Chaos',
+      author:'NineTailsGG', authorInitial:'N', patch:'14.8',
+      rating:4.4, votes:186, spicy:228,
+      tags:['Jinx','Marksman','New!'],
+      description:'Kraken into Runaan\'s spreads on-hit damage through clustered ARAM fights. Fish for Get Excited! off one pick — one reset often wins the bridge. Rockets for poke and executes; minigun when tanks step on you.',
+      strengths:['Terrific teamfight DPS after one kill','Long-range execute pressure','Strong tower crush with minigun'],
+      weaknesses:['Immobile — Flash is your only dash','Hard vs multiple divers','Needs peel from frontline'],
+      difficulty:'Medium',
+      items:['Kraken Slayer',"Runaan's Hurricane",'Infinity Edge',"Lord Dominik's Regards",'Bloodthirster','Guardian Angel'],
+      itemIds:['6672','3085','3031','3036','3072','3026'],
+      itemsNote:'Fourth item Lord Dominik\'s when two beefy frontliners stack armor; otherwise Bloodthirster for sustain.',
+      itemPaths:{
+        main:{
+          usecase:'Run when their carries are reachable after your tanks engage — Kraken + Runaan\'s spike wins mid-game ARAM brawls.',
+          notes:'Swap GA earlier if one revive swing decides the game.',
+        },
+        alternates:[],
+      },
+      spells:['Flash','Heal'],
+      augmentPicks:{
+        prismatic:[
+          { name:'Giant Slayer', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Giant_Slayer_mayhem_augment.png' },
+          { name:'Fan the Hammer', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Fan_the_Hammer_mayhem_augment.png' },
+          { name:'Dual Wield', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Dual_Wield_mayhem_augment.png' },
+          { name:'Dashing', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Dashing_mayhem_augment.png' }
+        ],
+        gold:[
+          { name:'Get Excited', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Get_Excited_mayhem_augment.png' },
+          { name:'It\'s Critical', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/It%27s_Critical_mayhem_augment.png' },
+          { name:'Skilled Sniper', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Skilled_Sniper_mayhem_augment.png' },
+          { name:'Marksmage', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Marksmage_mayhem_augment.png' }
+        ],
+        silver:[
+          { name:'Buff Buddies', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Buff_Buddies_mayhem_augment.png' },
+          { name:'Fetch', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Fetch_mayhem_augment.png' },
+          { name:'First-Aid Kit', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/First-Aid_Kit_mayhem_augment.png' },
+          { name:'Flashbang', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Flashbang_mayhem_augment.png' }
+        ]
+      },
+      bisChaseRefs:['prismatic:0','gold:0','gold:2','silver:0'],
+      videoUrl:'',
+      comments:[
+        {author:'IceBridgeCarry',initial:'I',time:'3 days ago',text:'First reset feels illegal on ARAM — you just chain rockets down the entire team.',votes:17},
+        {author:'HolyAbyss',initial:'H',time:'2 days ago',text:'Do you ever go Galeforce second for the dash instead of Runaan\'s?',votes:6},
+        {author:'NineTailsGG',initial:'N',time:'1 day ago',text:'Almost never — Runaan\'s is what lets you cash Get Excited in cluttered fights.',votes:12}
+      ]
+    },
+    'malphite-1': {
+      championKey:'malphite',
+      buildTag:'tank',
+      buildTagLabel:'Tank',
+      playstyleTag:'tank',
+      playstyleLabel:'Tank',
+      champName:'Malphite', champRole:'Tank · Fighter',
+      champImg:'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Malphite_0.jpg',
+      champIcon:'https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Malphite.png',
+      title:'Monolith Frontline — Unkillable CC Tank',
+      author:'GalacticAbyss', authorInitial:'G', patch:'14.8',
+      rating:4.0, votes:149, spicy:112,
+      tags:['Malphite','Tank','New!'],
+      description:'Sunfire + Frozen Heart neuters ADC comps on the narrow bridge. Your job is one big Unstoppable Force onto carries, then stick with Q attack-speed shred. Thornmail punishes greedy healers.',
+      strengths:['AoE knock-up wins fights','Armor stacking scales into AD-heavy ARAM lobbies','Simple execution'],
+      weaknesses:['Weak into heavy AP poke','Cooldown reliant','Needs follow-up from damage dealers'],
+      difficulty:'Easy',
+      items:['Sunfire Aegis','Frozen Heart','Thornmail',"Abyssal Mask",'Randuin\'s Omen','Warmog\'s Armor'],
+      itemIds:['3068','3110','3075','8020','3143','3083'],
+      itemsNote:'Swap Abyssal earlier when three+ magic threats show up; otherwise armor stack first.',
+      itemPaths:{
+        main:{
+          usecase:'Lock this route when their damage is mostly physical — you become a moving wall that burns everything nearby.',
+          notes:'Randuin\'s third vs crit comps; Warmog\'s last for siege stamina.',
+        },
+        alternates:[],
+      },
+      spells:['Flash','Mark'],
+      augmentPicks:{
+        prismatic:[
+          { name:'Goliath', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Goliath_mayhem_augment.png' },
+          { name:'Courage of the Colossus', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Courage_of_the_Colossus_mayhem_augment.png' },
+          { name:'Can\'t Touch This', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Can%27t_Touch_This_mayhem_augment.png' },
+          { name:'Circle of Death', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Circle_of_Death_mayhem_augment.png' }
+        ],
+        gold:[
+          { name:'Tank Engine', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Tank_Engine_mayhem_augment.png' },
+          { name:'Perseverance', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Perseverance_mayhem_augment.png' },
+          { name:'Impassable', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Impassable_mayhem_augment.png' },
+          { name:'Slow and Steady', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Slow_and_Steady_mayhem_augment.png' }
+        ],
+        silver:[
+          { name:'Blunt Force', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Blunt_Force_mayhem_augment.png' },
+          { name:'Goredrink', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Goredrink_mayhem_augment.png' },
+          { name:'Adamant', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Adamant_mayhem_augment.png' },
+          { name:'The Brutalizer', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/The_Brutalizer_mayhem_augment.png' }
+        ]
+      },
+      bisChaseRefs:['prismatic:0','gold:0','gold:1','silver:0'],
+      videoUrl:'',
+      comments:[
+        {author:'NineTailsGG',initial:'N',time:'4 days ago',text:'Press R, watch their carries evaporate. Tank Malphite is ARAM therapy.',votes:15},
+        {author:'HolyAbyss',initial:'H',time:'2 days ago',text:'How do you play into Azir / Cass when they kite forever?',votes:5}
+      ]
+    },
+    'thresh-1': {
+      championKey:'thresh',
+      buildTag:'support',
+      buildTagLabel:'Support',
+      playstyleTag:'support',
+      playstyleLabel:'Support',
+      champName:'Thresh', champRole:'Support · Fighter',
+      champImg:'https://ddragon.leagueoflegends.com/cdn/img/champion/loading/Thresh_0.jpg',
+      champIcon:'https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Thresh.png',
+      title:'Depth Charge — Hooks, Flays & Lantern Saves',
+      author:'HolyAbyss', authorInitial:'H', patch:'14.8',
+      rating:3.9, votes:121, spicy:62,
+      tags:['Thresh','Support','New!'],
+      description:'Zeke\'s ties your crowd control to your carry\'s damage spike. Knight\'s Vow soaks burst aimed at your ADC; Thornmail punishes dive assassins. Lantern saves matter more than deaths on Thresh.',
+      strengths:['Pick potential with Death Sentence','Peel + engage in one kit','Lantern bailouts swing ARAM dice rolls'],
+      weaknesses:['Skillshot reliant','Falls behind when hooks miss','Needs follow damage from team'],
+      difficulty:'Hard',
+      items:["Zeke's Convergence","Knight's Vow",'Thornmail','Redemption','Warmog\'s Armor','Vigilant Wardstone'],
+      itemIds:['3050','3109','3075','3107','3083','4643'],
+      itemsNote:'Redemption third when fights drag; Warmog\'s later so you can tank poke between engages.',
+      itemPaths:{
+        main:{
+          usecase:'Best when you have a fed marksman or mage to oath — Zeke\'s turns every hook into a kill window.',
+          notes:'Swap Redemption for Mikael\'s if enemy CC locks your carry.',
+        },
+        alternates:[],
+      },
+      spells:['Flash','Exhaust'],
+      augmentPicks:{
+        prismatic:[
+          { name:'Laser Heal', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Laser_Heal_mayhem_augment.png' },
+          { name:'Mystic Punch', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Mystic_Punch_mayhem_augment.png' },
+          { name:'Ominous Pact', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Ominous_Pact_mayhem_augment.png' },
+          { name:'Final Form', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Final_Form_mayhem_augment.png' }
+        ],
+        gold:[
+          { name:'Soul Siphon', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Soul_Siphon_mayhem_augment.png' },
+          { name:'Divine Intervention', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Divine_Intervention_mayhem_augment.png' },
+          { name:'Holy Fire', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Holy_Fire_mayhem_augment.png' },
+          { name:'Keystone Conjurer', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Keystone_Conjurer_mayhem_augment.png' }
+        ],
+        silver:[
+          { name:'First-Aid Kit', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/First-Aid_Kit_mayhem_augment.png' },
+          { name:'Escape Plan', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Escape_Plan_mayhem_augment.png' },
+          { name:'Frost Wraith', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Frost_Wraith_mayhem_augment.png' },
+          { name:'Guilty Pleasure', icon:'https://wiki.leagueoflegends.com/en-us/Special:FilePath/Guilty_Pleasure_mayhem_augment.png' }
+        ]
+      },
+      bisChaseRefs:['prismatic:0','gold:0','gold:1','silver:0'],
+      videoUrl:'',
+      comments:[
+        {author:'GalacticAbyss',initial:'G',time:'3 days ago',text:'Lantern saves tilt the enemy team harder than any solo kill.',votes:10},
+        {author:'IceBridgeCarry',initial:'I',time:'1 day ago',text:'When do you roam forward vs sit on carry? Still figuring spacing.',votes:4}
+      ]
+    }
+  };
+
+  /* ============================================================
+     RENDER
+  ============================================================ */
+  (function() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('build') || 'lux-1';
+    // Check user builds first, then fall back to static builds
+    const b  = (window._userBuilds && window._userBuilds[id]) || BUILDS[id];
+
+    if (!b) {
+      document.getElementById('bd-build-title').textContent = 'Build not found.';
+      return;
+    }
+
+    if (b.augmentPicks) {
+      ['prismatic', 'gold', 'silver'].forEach(function (t) {
+        var arr = b.augmentPicks[t] ? b.augmentPicks[t].slice() : [];
+        while (arr.length < 4) arr.push({ name: '', icon: '' });
+        b.augmentPicks[t] = arr.slice(0, 4);
+      });
+    }
+    if (!b.bisChaseRefs || !b.bisChaseRefs.length) {
+      if (b.bisChasePicks && b.bisChasePicks.length && b.augmentPicks) {
+        var derivedRefs = [];
+        b.bisChasePicks.forEach(function (bp) {
+          if (bp && bp.tier != null && bp.slotIndex != null && String(bp.tier).length) {
+            derivedRefs.push(bp.tier + ':' + bp.slotIndex);
+            return;
+          }
+          if (!bp || !bp.name) return;
+          ['prismatic', 'gold', 'silver'].forEach(function (tier) {
+            var arr = b.augmentPicks[tier] || [];
+            for (var i = 0; i < arr.length; i++) {
+              if (arr[i] && arr[i].name === bp.name && derivedRefs.indexOf(tier + ':' + i) === -1) {
+                derivedRefs.push(tier + ':' + i);
+              }
+            }
+          });
+        });
+        if (derivedRefs.length) b.bisChaseRefs = derivedRefs.slice(0, 4);
+      }
+    }
+    if ((!b.bisChasePicks || !b.bisChasePicks.length) && b.bisChaseRefs && b.bisChaseRefs.length && b.augmentPicks) {
+      b.bisChasePicks = b.bisChaseRefs.map(function (rk) {
+        var parts = rk.split(':');
+        var tier = parts[0];
+        var idx = parseInt(parts[1], 10);
+        var pick = b.augmentPicks[tier] && b.augmentPicks[tier][idx];
+        if (!pick || !pick.name) return null;
+        return { name: pick.name, icon: pick.icon || '', tier: tier, slotIndex: idx };
+      }).filter(Boolean);
+    }
+
+    // Page title
+    document.getElementById('page-title').textContent = `${b.title} — ARAM Bound`;
+
+    // Hero
+    document.getElementById('bd-hero-bg').style.backgroundImage = `url('${b.champImg}')`;
+    const splashEl = document.getElementById('bd-splash');
+    splashEl.src = b.champIcon;
+    splashEl.alt = b.champName;
+    document.getElementById('bd-breadcrumb-champ').textContent = b.champName;
+    document.getElementById('bd-breadcrumb-title').textContent = b.title;
+    document.getElementById('bd-build-title').textContent = b.title;
+    document.getElementById('bd-author').textContent = b.author;
+    document.getElementById('bd-patch').textContent = `Patch ${b.patch}`;
+    const stars = Math.round(b.rating || 0);
+    const starsEl = document.getElementById('bd-stars');
+    const ratingEl = document.getElementById('bd-rating-text');
+    if (stars > 0) {
+      starsEl.textContent = '★'.repeat(stars) + '☆'.repeat(5 - stars);
+      ratingEl.textContent = `${b.rating}/5.0`;
+    } else {
+      starsEl.textContent = '';
+      ratingEl.textContent = b._userSubmitted ? '✦ Your Build' : '';
+    }
+    document.getElementById('bd-votes').textContent = b.votes;
+
+    // Spicy
+    const spicyEl = document.getElementById('bd-spicy-count');
+    spicyEl.textContent = b.spicy;
+    if (b.spicy > 0) spicyEl.classList.add('has-votes');
+    function updateSpiceLevel(count) {
+      const el = document.getElementById('bd-spice-level');
+      if (!el) return;
+      if (count >= 200) { el.textContent = '🌶️🌶️🌶️'; el.title = 'Triple Spicy!'; }
+      else if (count >= 100) { el.textContent = '🌶️🌶️'; el.title = 'Double Spicy!'; }
+      else if (count >= 50) { el.textContent = '🌶️'; el.title = 'Spicy!'; }
+      else { el.textContent = ''; }
+    }
+    updateSpiceLevel(b.spicy);
+
+    document.getElementById('bd-spicy-btn').addEventListener('click', () => {
+      const n = parseInt(spicyEl.textContent, 10);
+      const spiced = document.getElementById('bd-spicy-btn').classList.toggle('spiced');
+      const newN = spiced ? n + 1 : Math.max(0, n - 1);
+      spicyEl.textContent = newN;
+      spicyEl.classList.toggle('has-votes', newN > 0);
+      updateSpiceLevel(newN);
+    });
+
+    document.getElementById('bd-vote-btn').addEventListener('click', function() {
+      const voted = this.classList.toggle('voted');
+      const n = parseInt(document.getElementById('bd-votes').textContent, 10);
+      document.getElementById('bd-votes').textContent = voted ? n + 1 : n - 1;
+    });
+
+    const DD_VER = '14.8.1';
+    const DDRAGON_SPELL = 'https://ddragon.leagueoflegends.com/cdn/' + DD_VER + '/img/spell';
+    const SPELL_ICON = {
+      'Snowball': DDRAGON_SPELL + '/SummonerSnowball.png',
+      'Mark': DDRAGON_SPELL + '/SummonerSnowball.png',
+      'Mark/Snowball': DDRAGON_SPELL + '/SummonerSnowball.png',
+      'Clarity': DDRAGON_SPELL + '/SummonerMana.png',
+      'Ignite': DDRAGON_SPELL + '/SummonerDot.png',
+      'Flash': DDRAGON_SPELL + '/SummonerFlash.png',
+      'Ghost': DDRAGON_SPELL + '/SummonerHaste.png',
+      'Heal': DDRAGON_SPELL + '/SummonerHeal.png',
+      'Cleanse': DDRAGON_SPELL + '/SummonerBoost.png',
+      'Exhaust': DDRAGON_SPELL + '/SummonerExhaust.png',
+      'Barrier': DDRAGON_SPELL + '/SummonerBarrier.png',
+    };
+    function spellIconForName(name) {
+      if (!name) return '';
+      return SPELL_ICON[name] || '';
+    }
+    function itemIconUrlFromId(id) {
+      if (!id) return '';
+      return 'https://ddragon.leagueoflegends.com/cdn/' + DD_VER + '/img/item/' + id + '.png';
+    }
+    function escapeHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    // Tags
+    const tagsEl = document.getElementById('bd-tags');
+    (b.tags || []).forEach(t => {
+      const sp = document.createElement('span');
+      sp.className = 'build-tag';
+      sp.textContent = t;
+      tagsEl.appendChild(sp);
+    });
+
+    // Overview
+    document.getElementById('bd-description').textContent = b.description;
+
+    // Core path intro (user builds)
+    const usecaseEl = document.getElementById('bd-core-path-usecase');
+    if (usecaseEl) {
+      const u = b.itemPaths && b.itemPaths.main && b.itemPaths.main.usecase;
+      if (u) {
+        usecaseEl.textContent = u;
+        usecaseEl.removeAttribute('hidden');
+      } else {
+        usecaseEl.textContent = '';
+        usecaseEl.setAttribute('hidden', '');
+      }
+    }
+
+    // Items
+    const itemsEl = document.getElementById('bd-items-path');
+    itemsEl.innerHTML = '';
+    const useItemIcons = Array.isArray(b.itemIds) && b.itemIds.length && b.items && b.itemIds.length === b.items.length;
+    if (useItemIcons) {
+      const row = document.createElement('div');
+      row.className = 'bd-item-icon-row';
+      b.itemIds.forEach((id, i) => {
+        if (i > 0) {
+          const ar = document.createElement('span');
+          ar.className = 'bd-item-icon-arrow';
+          ar.setAttribute('aria-hidden', 'true');
+          ar.textContent = '→';
+          row.appendChild(ar);
+        }
+        const slot = document.createElement('div');
+        slot.className = 'bd-item-icon-slot';
+        const img = document.createElement('img');
+        img.src = itemIconUrlFromId(id);
+        img.alt = b.items[i] || '';
+        img.width = 60;
+        img.height = 60;
+        img.onerror = () => { img.classList.add('bd-icon-err'); };
+        const nm = document.createElement('span');
+        nm.className = 'bd-item-icon-name';
+        nm.textContent = (b.items[i] || '').replace(/<[^>]+>/g, '');
+        slot.appendChild(img);
+        slot.appendChild(nm);
+        row.appendChild(slot);
+      });
+      itemsEl.appendChild(row);
+    } else {
+      (b.items || []).forEach((item, i) => {
+        const node = document.createElement('span');
+        node.className = 'bd-item-node';
+        node.innerHTML = '<span class="item-num">' + (i + 1) + '</span> ' + item;
+        itemsEl.appendChild(node);
+        if (i < b.items.length - 1) {
+          const arr = document.createElement('span');
+          arr.className = 'bd-item-arrow';
+          arr.textContent = '→';
+          itemsEl.appendChild(arr);
+        }
+      });
+    }
+
+    const altHost = document.getElementById('bd-item-alt-paths');
+    if (altHost) {
+      altHost.innerHTML = '';
+      const alts = b.itemPaths && b.itemPaths.alternates;
+      if (alts && alts.length) {
+        alts.forEach((alt, idx) => {
+          const block = document.createElement('div');
+          block.style.cssText = 'margin-top:16px;padding:14px 16px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);';
+          const title = alt.label || 'Alternate path';
+          block.innerHTML = '<div style="font-weight:800;font-size:.85rem;margin-bottom:8px;color:var(--text-secondary,#c7d3e8);">' + escapeHtml(title) + '</div>';
+          if (alt.usecase) {
+            const p = document.createElement('p');
+            p.style.cssText = 'font-size:.82rem;color:var(--text-muted,#8a9bb5);margin:0 0 10px 0;line-height:1.45;';
+            p.textContent = alt.usecase;
+            block.appendChild(p);
+          }
+          const row = document.createElement('div');
+          row.className = 'bd-item-icon-row';
+          const ids = alt.itemIds || [];
+          const names = alt.itemNames || [];
+          ids.forEach((id, i) => {
+            if (i > 0) {
+              const ar = document.createElement('span');
+              ar.className = 'bd-item-icon-arrow';
+              ar.textContent = '→';
+              row.appendChild(ar);
+            }
+            const slot = document.createElement('div');
+            slot.className = 'bd-item-icon-slot';
+            const img = document.createElement('img');
+            img.src = itemIconUrlFromId(id);
+            img.alt = names[i] || '';
+            img.width = 60;
+            img.height = 60;
+            img.onerror = () => { img.classList.add('bd-icon-err'); };
+            const nm = document.createElement('span');
+            nm.className = 'bd-item-icon-name';
+            nm.textContent = (names[i] || '').replace(/<[^>]+>/g, '');
+            slot.appendChild(img);
+            slot.appendChild(nm);
+            row.appendChild(slot);
+          });
+          block.appendChild(row);
+          if (alt.notes) {
+            const note = document.createElement('p');
+            note.style.cssText = 'font-size:.72rem;color:var(--text-muted);margin-top:10px;font-style:italic;';
+            note.textContent = alt.notes;
+            block.appendChild(note);
+          }
+          altHost.appendChild(block);
+        });
+      }
+    }
+
+    document.getElementById('bd-items-note').textContent = b.itemsNote || '';
+
+    const spellsEl = document.getElementById('bd-spells');
+    spellsEl.innerHTML = '';
+    (b.spells || []).forEach(s => {
+      const wrap = document.createElement('div');
+      wrap.className = 'bd-summoner-slot';
+      const url = spellIconForName(s);
+      if (url) {
+        const img = document.createElement('img');
+        img.className = 'bd-summoner-icon';
+        img.src = url;
+        img.alt = '';
+        img.width = 48;
+        img.height = 48;
+        img.onerror = () => { img.classList.add('bd-icon-err'); };
+        wrap.appendChild(img);
+      }
+      const nm = document.createElement('span');
+      nm.className = 'bd-summoner-name';
+      nm.textContent = s;
+      wrap.appendChild(nm);
+      spellsEl.appendChild(wrap);
+    });
+
+    const bisChaseEl = document.getElementById('bd-augment-bis-chase');
+    const bisBanner = document.getElementById('bd-augment-bis-banner');
+    const augTiersRoot = document.getElementById('bd-augment-tiers');
+    const introAug = document.getElementById('bd-augment-intro');
+
+    function computeBisChaseFour(picks) {
+      if (!picks) return [];
+      var attempts = [
+        ['prismatic', 0], ['gold', 0], ['silver', 0], ['prismatic', 1],
+        ['gold', 1], ['silver', 1], ['silver', 2], ['gold', 2]
+      ];
+      var out = [];
+      var seen = new Set();
+      for (var i = 0; i < attempts.length && out.length < 4; i++) {
+        var tier = attempts[i][0];
+        var idx = attempts[i][1];
+        var arr = picks[tier];
+        if (!arr || !arr[idx] || !arr[idx].name) continue;
+        var name = arr[idx].name;
+        if (seen.has(name)) continue;
+        seen.add(name);
+        var slotPrefix = { prismatic: 'P', gold: 'G', silver: 'S' };
+        out.push({
+          name: name,
+          icon: arr[idx].icon || '',
+          tier: tier,
+          slotLabel: (slotPrefix[tier] || '?') + (idx + 1)
+        });
+      }
+      return out;
+    }
+
+    function computeBisChaseLegacy(augments) {
+      if (!augments || !augments.length) return [];
+      var pri = augments.find(function (a) { return a.tier === 'prismatic'; });
+      var gol = augments.find(function (a) { return a.tier === 'gold'; });
+      var sil = augments.find(function (a) { return a.tier === 'silver'; });
+      var sil2 = augments.filter(function (a) { return a.tier === 'silver'; })[1];
+      var out = [];
+      if (pri) out.push({ name: pri.bis, icon: '', tier: 'prismatic', slotLabel: 'BiS' });
+      if (gol) out.push({ name: gol.bis, icon: '', tier: 'gold', slotLabel: 'BiS' });
+      if (sil) out.push({ name: sil.bis, icon: '', tier: 'silver', slotLabel: 'BiS' });
+      if (sil2 && out.length < 4) out.push({ name: sil2.bis, icon: '', tier: 'silver', slotLabel: 'Alt' });
+      return out.slice(0, 4);
+    }
+
+    function augmentBannerText(build) {
+      if (build.augmentPicks) {
+        var p = build.augmentPicks;
+        var bits = [];
+        if (p.prismatic && p.prismatic[0] && p.prismatic[0].name) bits.push('Prismatic: ' + p.prismatic[0].name);
+        if (p.gold && p.gold[0] && p.gold[0].name) bits.push('Gold: ' + p.gold[0].name);
+        if (p.silver && p.silver[0] && p.silver[0].name) bits.push('Silver: ' + p.silver[0].name);
+        return bits.join(' · ');
+      }
+      var ag = build.augments || [];
+      var pri = ag.find(function (a) { return a.tier === 'prismatic'; });
+      var gol = ag.find(function (a) { return a.tier === 'gold'; });
+      var sil = ag.find(function (a) { return a.tier === 'silver'; });
+      var bits = [];
+      if (pri) bits.push('Prismatic: ' + pri.bis);
+      if (gol) bits.push('Gold: ' + gol.bis);
+      if (sil) bits.push('Silver: ' + sil.bis);
+      return bits.join(' · ');
+    }
+
+    if (introAug) {
+      if (b.augmentPicks) {
+        introAug.innerHTML =
+          'The <strong>Top 4 BiS</strong> strip is the (up to) four list slots you had checked as BiS on the create form — ' +
+          'independent checkboxes, four checked maximum across all 12 rows. ' +
+          '<strong>All tier picks</strong> shows every slot; gold ring + BiS tag = those checked rows.';
+      } else {
+        introAug.innerHTML = 'Curated augment recommendations for this build. The compact strip highlights priority picks; tier sections list BiS and alternates from the mock dataset.';
+      }
+    }
+
+    if (bisChaseEl) {
+      var chase = [];
+      if (b.bisChasePicks && b.bisChasePicks.some(function (p) { return p && p.name; })) {
+        var tierLetter = { prismatic: 'P', gold: 'G', silver: 'S' };
+        b.bisChasePicks.forEach(function (p, idx) {
+          if (!p || !p.name) return;
+          var sl =
+            p.tier != null && p.slotIndex != null && tierLetter[p.tier]
+              ? tierLetter[p.tier] + (p.slotIndex + 1)
+              : 'BiS ' + (idx + 1);
+          chase.push({
+            name: p.name,
+            icon: p.icon || '',
+            slotLabel: sl,
+          });
+        });
+      } else if (b.augmentPicks) {
+        chase = computeBisChaseFour(b.augmentPicks);
+      } else {
+        chase = computeBisChaseLegacy(b.augments || []);
+      }
+      if (chase.length) {
+        bisChaseEl.hidden = false;
+        bisChaseEl.innerHTML = '<div class="bd-aug-bis-chase-head">★ Top 4 BiS to chase</div>';
+        var row = document.createElement('div');
+        row.className = 'bd-aug-bis-chase-row';
+        chase.forEach(function (c) {
+          var slot = document.createElement('div');
+          slot.className = 'bd-aug-bis-chase-pick';
+          var sl = document.createElement('span');
+          sl.className = 'bd-aug-bis-chase-sl';
+          sl.textContent = c.slotLabel;
+          var img = document.createElement('img');
+          img.className = 'bd-aug-bis-chase-icon';
+          if (c.icon) {
+            img.src = c.icon;
+            img.alt = '';
+            img.onerror = function () { img.classList.add('bd-icon-err'); };
+          } else {
+            img.classList.add('bd-icon-err');
+            img.removeAttribute('src');
+          }
+          var nm = document.createElement('span');
+          nm.className = 'bd-aug-bis-chase-name';
+          nm.textContent = c.name;
+          slot.appendChild(sl);
+          slot.appendChild(img);
+          slot.appendChild(nm);
+          row.appendChild(slot);
+        });
+        bisChaseEl.appendChild(row);
+      } else {
+        bisChaseEl.hidden = true;
+        bisChaseEl.innerHTML = '';
+      }
+    }
+
+    if (bisBanner) {
+      if (b.augmentPicks) {
+        bisBanner.innerHTML = '';
+      } else {
+        var txt = augmentBannerText(b);
+        if (txt) {
+          bisBanner.innerHTML = '<div class="bd-bis-combo-banner"><span class="bd-bis-combo-label">★ BiS Combo</span><span class="bd-bis-combo-text">' + escapeHtml(txt) + '</span></div>';
+        } else {
+          bisBanner.innerHTML = '';
+        }
+      }
+    }
+
+    var SLOT_PREFIX = { prismatic: 'P', gold: 'G', silver: 'S' };
+
+    if (augTiersRoot) {
+      augTiersRoot.innerHTML = '';
+      var tierMeta = [
+        { key: 'prismatic', label: 'Top 4 Prismatic', badge: 'tier-prismatic' },
+        { key: 'gold', label: 'Top 4 Gold', badge: 'tier-gold' },
+        { key: 'silver', label: 'Top 4 Silver', badge: 'tier-silver' },
+      ];
+      if (b.augmentPicks) {
+        var bisRefSet = new Set();
+        if (b.bisChaseRefs) {
+          b.bisChaseRefs.forEach(function (rk) { bisRefSet.add(rk); });
+        }
+        tierMeta.forEach(function (meta) {
+          var key = meta.key;
+          var label = meta.label;
+          var badge = meta.badge;
+          var picks = b.augmentPicks[key];
+          if (!picks || !picks.length) return;
+          var tier = document.createElement('div');
+          tier.className = 'bd-aug-tier';
+          tier.innerHTML = '<div class="bd-aug-tier-head"><span class="bd-aug-tier-badge ' + badge + '">' + escapeHtml(label) + '</span></div>';
+          var picksRow = document.createElement('div');
+          picksRow.className = 'bd-aug-picks';
+          picks.forEach(function (p, idx) {
+            var slot = document.createElement('div');
+            var empty = !p.name;
+            var slotKey = key + ':' + idx;
+            slot.className = 'bd-aug-pick bd-aug-pick--tall' + (empty ? ' bd-aug-pick--empty' : '') + (bisRefSet.has(slotKey) ? ' bd-aug-pick--bis' : '');
+            var lab = document.createElement('span');
+            lab.className = 'bd-aug-slot-label';
+            lab.textContent = (SLOT_PREFIX[key] || '?') + (idx + 1);
+            if (bisRefSet.has(slotKey)) {
+              var bisBadge = document.createElement('span');
+              bisBadge.className = 'bd-aug-pick-bis-badge';
+              bisBadge.setAttribute('aria-label', 'Marked as BiS');
+              bisBadge.textContent = 'BiS';
+              slot.appendChild(bisBadge);
+            }
+            var img = document.createElement('img');
+            img.className = 'bd-aug-pick-icon';
+            if (!empty && p.icon) {
+              img.src = p.icon;
+              img.alt = '';
+              img.onerror = function () { img.classList.add('bd-icon-err'); };
+            } else {
+              img.classList.add('bd-icon-err');
+              img.removeAttribute('src');
+            }
+            var nm = document.createElement('span');
+            nm.className = 'bd-aug-pick-name';
+            nm.textContent = empty ? '—' : p.name;
+            slot.appendChild(lab);
+            slot.appendChild(img);
+            slot.appendChild(nm);
+            picksRow.appendChild(slot);
+          });
+          tier.appendChild(picksRow);
+          augTiersRoot.appendChild(tier);
+        });
+      } else {
+        var byTier = { silver: [], gold: [], prismatic: [] };
+        (b.augments || []).forEach(function (a) {
+          if (byTier[a.tier]) byTier[a.tier].push(a);
+        });
+        tierMeta.forEach(function (meta) {
+          var key = meta.key;
+          var label = meta.label.replace('Top 4 ', '');
+          var badge = meta.badge;
+          var list = byTier[key];
+          if (!list.length) return;
+          var tier = document.createElement('div');
+          tier.className = 'bd-aug-tier';
+          tier.innerHTML = '<div class="bd-aug-tier-head"><span class="bd-aug-tier-badge ' + badge + '">' + escapeHtml(label) + '</span></div>';
+          var picksRow = document.createElement('div');
+          picksRow.className = 'bd-aug-picks';
+          list.forEach(function (entry) {
+            var slot = document.createElement('div');
+            slot.className = 'bd-aug-pick';
+            slot.style.minWidth = '120px';
+            slot.innerHTML = '<div style="font-size:.72rem;font-weight:700;color:var(--text-secondary);margin-bottom:4px;">★ ' + escapeHtml(entry.bis) + '</div>';
+            (entry.alts || []).forEach(function (alt) {
+              var line = document.createElement('div');
+              line.style.fontSize = '.65rem';
+              line.style.color = 'var(--text-muted)';
+              line.textContent = alt;
+              slot.appendChild(line);
+            });
+            picksRow.appendChild(slot);
+          });
+          tier.appendChild(picksRow);
+          augTiersRoot.appendChild(tier);
+        });
+      }
+    }
+
+    function youtubePhaseEmbedUrl(ph) {
+      if (!ph || !ph.videoId) return '';
+      var params = new URLSearchParams({ rel: '0' });
+      var s = ph.startSec != null && ph.startSec !== '' ? String(ph.startSec).trim() : '';
+      var e = ph.endSec != null && ph.endSec !== '' ? String(ph.endSec).trim() : '';
+      if (s) params.set('start', s);
+      if (e) params.set('end', e);
+      return 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(ph.videoId) + '?' + params.toString();
+    }
+
+    function formatClipRange(ph) {
+      if (!ph) return '';
+      var s = ph.startSec != null && ph.startSec !== '' ? String(ph.startSec).trim() : '';
+      var e = ph.endSec != null && ph.endSec !== '' ? String(ph.endSec).trim() : '';
+      if (!s && !e) return 'No start/end trim — full video plays.';
+      if (s && e) return 'Clip window on YouTube timeline: ' + s + 's → ' + e + 's';
+      if (s) return 'Starts at ' + s + 's (no end set)';
+      return '';
+    }
+
+    var phasesRoot = document.getElementById('bd-youtube-phases');
+    if (phasesRoot) {
+      phasesRoot.innerHTML = '';
+      var phaseUi = {
+        early: {
+          title: 'Early game highlight',
+          hint: 'Ideal in-game clock for footage: 3:00 – 9:00.',
+        },
+        mid: {
+          title: 'Mid game highlight',
+          hint: 'Ideal in-game clock for footage: 9:01 – 15:00.',
+        },
+        late: {
+          title: 'Late game highlight',
+          hint: 'Ideal in-game clock for footage: 15:01 onward.',
+        },
+      };
+      var phases = b.youtubePhases;
+      var hasPhases = phases && (phases.early || phases.mid || phases.late);
+
+      function appendPhaseBlock(key, ph, opts) {
+        var art = document.createElement('article');
+        art.className = 'bd-youtube-phase' + (!ph ? ' bd-youtube-phase--empty' : '');
+        var h = document.createElement('h3');
+        h.className = 'bd-youtube-phase-title';
+        h.textContent = opts.title;
+        var hint = document.createElement('p');
+        hint.className = 'bd-youtube-phase-hint';
+        hint.textContent = opts.hint;
+        art.appendChild(h);
+        art.appendChild(hint);
+        if (ph && ph.videoId) {
+          var embedSrc = youtubePhaseEmbedUrl(ph);
+          var rangeEl = document.createElement('p');
+          rangeEl.className = 'bd-youtube-phase-range';
+          rangeEl.innerHTML = '<code>' + escapeHtml(formatClipRange(ph)) + '</code>';
+          art.appendChild(rangeEl);
+          var wrap = document.createElement('div');
+          wrap.className = 'bd-youtube-embed';
+          var iframe = document.createElement('iframe');
+          iframe.src = embedSrc;
+          iframe.title = opts.title;
+          iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.loading = 'lazy';
+          wrap.appendChild(iframe);
+          art.appendChild(wrap);
+        } else {
+          var empty = document.createElement('p');
+          empty.className = 'bd-youtube-phase-empty-note';
+          empty.textContent = 'No YouTube link saved for this phase.';
+          art.appendChild(empty);
+        }
+        phasesRoot.appendChild(art);
+      }
+
+      if (hasPhases) {
+        ['early', 'mid', 'late'].forEach(function (k) {
+          appendPhaseBlock(k, phases[k], phaseUi[k]);
+        });
+      } else if (b.videoUrl) {
+        var art = document.createElement('article');
+        art.className = 'bd-youtube-phase';
+        var h = document.createElement('h3');
+        h.className = 'bd-youtube-phase-title';
+        h.textContent = 'Gameplay video';
+        var hint = document.createElement('p');
+        hint.className = 'bd-youtube-phase-hint';
+        hint.textContent = 'Legacy embed (mock dataset). Trim times are not stored for this entry.';
+        art.appendChild(h);
+        art.appendChild(hint);
+        var wrap = document.createElement('div');
+        wrap.className = 'bd-youtube-embed';
+        var iframe = document.createElement('iframe');
+        iframe.src = b.videoUrl;
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.loading = 'lazy';
+        wrap.appendChild(iframe);
+        art.appendChild(wrap);
+        phasesRoot.appendChild(art);
+      } else {
+        var emptyAll = document.createElement('p');
+        emptyAll.className = 'bd-youtube-phase-empty-note';
+        emptyAll.textContent = 'No gameplay clips linked yet.';
+        phasesRoot.appendChild(emptyAll);
+      }
+    }
+    // Delete button — only for user-submitted builds
+    if (b._userSubmitted) {
+      const videoSection = document.getElementById('section-video');
+      if (videoSection) {
+        const deleteWrap = document.createElement('div');
+        deleteWrap.className = 'bd-delete-wrap';
+        videoSection.appendChild(deleteWrap);
+
+        function showDeleteButton() {
+          deleteWrap.innerHTML = `
+            <button class="btn-danger" id="bd-delete-btn">🗑 Delete This Build</button>
+          `;
+          deleteWrap.querySelector('#bd-delete-btn').addEventListener('click', showConfirm);
+        }
+
+        function showConfirm() {
+          deleteWrap.innerHTML = `
+            <div class="bd-delete-confirm">
+              <span>Are you sure? This cannot be undone.</span>
+              <button class="bd-delete-confirm-yes" id="bd-delete-yes">Yes, delete</button>
+              <button class="bd-delete-confirm-no" id="bd-delete-no">Cancel</button>
+            </div>
+          `;
+          deleteWrap.querySelector('#bd-delete-no').addEventListener('click', showDeleteButton);
+          deleteWrap.querySelector('#bd-delete-yes').addEventListener('click', () => {
+            try {
+              const all = JSON.parse(localStorage.getItem('arambound_user_builds') || '{}');
+              delete all[id];
+              localStorage.setItem('arambound_user_builds', JSON.stringify(all));
+            } catch (e) {
+              console.error('Delete failed', e);
+            }
+            window.location.href = 'builds.html';
+          });
+        }
+
+        showDeleteButton();
+      }
+    }
+
+    // Comments
+    const commentsTitle = document.getElementById('bd-comments-title');
+    commentsTitle.textContent = '💬 Comments (' + (b.comments || []).length + ')';
+    const commentsList = document.getElementById('bd-comments-list');
+
+    function renderComment(c) {
+      const div = document.createElement('div');
+      div.className = 'bd-comment';
+      div.innerHTML = `
+        <div class="bd-comment-avatar">${c.initial}</div>
+        <div class="bd-comment-body">
+          <div class="bd-comment-header">
+            <span class="bd-comment-author">${c.author}</span>
+            <span class="bd-comment-time">${c.time}</span>
+          </div>
+          <p class="bd-comment-text">${c.text}</p>
+          <div class="bd-comment-footer">
+            <button class="bd-comment-vote">▲ ${c.votes}</button>
+            <button class="bd-comment-reply">Reply</button>
+          </div>
+        </div>`;
+      div.querySelector('.bd-comment-vote').addEventListener('click', function() {
+        const voted = this.classList.toggle('voted');
+        const n = parseInt(this.textContent.replace('▲ ','').trim(), 10);
+        this.textContent = `▲ ${voted ? n+1 : n-1}`;
+      });
+      commentsList.appendChild(div);
+    }
+
+    (b.comments || []).forEach(renderComment);
+
+    // Post comment
+    document.getElementById('bd-comment-submit').addEventListener('click', () => {
+      const input = document.getElementById('bd-comment-input');
+      const text = input.value.trim();
+      if (!text) return;
+      renderComment({ author: 'You', initial: 'Y', time: 'Just now', text, votes: 0 });
+      input.value = '';
+      const count = parseInt(commentsTitle.textContent.match(/\d+/)[0]) + 1;
+      commentsTitle.textContent = `💬 Comments (${count})`;
+    });
+
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Builds — ARAM Bound | ARAM Mayhem Build Browser</title>
+  <meta name="description" content="Browse featured ARAM Mayhem builds on ARAM Bound. Filter by champion and style, sort by top rated, spiciness, or comments." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================================================
+       NAVIGATION
+  ==================================================== -->
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">⚔</span>
+        <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"     class="nav-link"        id="nav-home">Home</a></li>
+        <li><a href="champions.html" class="nav-link"        id="nav-champions">Champions</a></li>
+        <li><a href="builds.html"    class="nav-link active" id="nav-builds">Builds</a></li>
+      </ul>
+      <!-- Global search -->
+      <div class="nav-search-wrap" id="navSearchWrap">
+        <input type="search" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
+        <button type="button" class="nav-search-submit" id="navSearchBtn" aria-label="Search">&#x1F50D;</button>
+      </div>
+      <div class="nav-actions">
+        <a href="create.html" class="btn btn-primary" id="nav-submit-btn">+ Submit Build</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===================================================
+       PAGE HERO + LIVE SEARCH
+  ==================================================== -->
+  <header class="page-hero" id="page-hero">
+    <div class="page-hero-ornament page-hero-ornament--left"></div>
+    <div class="page-hero-ornament page-hero-ornament--right"></div>
+    <div class="page-hero-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="page-breadcrumb-sep">›</span>
+        <span>Builds</span>
+      </nav>
+      <h1 class="page-hero-title">Builds</h1>
+      <p class="page-hero-sub">
+        All submitted builds for ARAM Mayhem. Filter by champion,
+        playstyle, or sort by votes.
+      </p>
+
+      <!-- Live search -->
+      <div class="hero-search-wrap">
+        <input
+          type="search"
+          class="hero-search-input"
+          id="buildSearch"
+          placeholder="Search builds by name…"
+          autocomplete="off"
+          aria-label="Search builds"
+        />
+        <span class="hero-search-icon" aria-hidden="true">🔍</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================
+       STICKY FILTER + SORT BAR
+  ==================================================== -->
+  <div class="builds-control-bar" id="buildsControlBar">
+    <!-- outer wrapper -->
+    <div class="builds-control-outer">
+
+      <!-- Champion dropdown (replaces button group) -->
+      <span class="filter-label">Champion:</span>
+      <div class="champ-dropdown" id="champDropdown">
+        <button class="champ-dropdown-btn" id="champDropdownBtn" aria-haspopup="listbox" aria-expanded="false">
+          <span class="champ-dd-icon" id="champDdIcon">⚔️</span>
+          <span class="champ-dd-label" id="champDdLabel">All Champions</span>
+          <span class="filter-count" id="champDdCount">4</span>
+          <span class="champ-dd-arrow">▾</span>
+        </button>
+        <ul class="champ-dropdown-list" id="champDropdownList" role="listbox" aria-label="Select champion">
+          <li class="champ-dropdown-item active" data-champ="all" role="option">
+            <span style="font-size:1.1rem;line-height:1;">⚔️</span>
+            <span class="champ-dd-name">All Champions</span>
+            <span class="filter-count" data-champ-count="all">4</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="control-divider"></div>
+
+      <!-- Playstyle: label + horizontally-scrollable pill strip -->
+      <span class="filter-label" style="flex-shrink:0;">Playstyle:</span>
+      <div class="playstyle-scroll-wrap">
+        <div class="playstyle-scroll" id="playstyleScroll">
+          <button class="filter-btn filter-btn-sm active" data-tag="all"           id="tag-all">All Styles</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="burst"         id="tag-burst">Burst</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="poke"          id="tag-poke">Poke</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="support"       id="tag-support">Support</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="ability-haste" id="tag-haste">Ability Haste</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="tank"          id="tag-tank">Tank</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="brawler"       id="tag-brawler">Brawler</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="stealth"       id="tag-stealth">Stealth</button>
+          <button class="filter-btn filter-btn-sm"        data-tag="exodia"        id="tag-exodia">⚡ Exodia</button>
+        </div>
+      </div>
+
+      <!-- RIGHT: Sort — always visible, never clips -->
+      <div class="builds-sort-wrap">
+        <div class="control-divider"></div>
+        <span class="filter-label">Sort:</span>
+        <select class="sort-select" id="sortSelect" aria-label="Sort builds">
+          <option value="votes">Top Rated</option>
+          <option value="spicy">🌶️ Spicy</option>
+          <option value="comments">Most Comments</option>
+        </select>
+      </div>
+
+    </div><!-- /builds-control-outer -->
+  </div><!-- /builds-control-bar -->
+
+
+  <!-- ===================================================
+       BUILDS MAIN CONTENT
+  ==================================================== -->
+  <section class="section" id="builds-section" style="background:var(--bg-surface);">
+    <div class="container">
+
+      <!-- Results count -->
+      <div class="builds-results-bar">
+        <p class="builds-results-count" id="resultsCount">
+          Showing <strong id="countVisible">4</strong> of <strong>4</strong> builds
+        </p>
+        <a href="create.html" class="btn btn-outline btn-sm" id="results-submit-link">+ Submit a Build</a>
+      </div>
+
+      <!-- Build feed grid -->
+      <div class="builds-feed-grid" id="buildsGrid">
+
+        <!-- ── LUX: Full AP — FEATURED ── -->
+        <article
+          class="build-feed-card featured reveal"
+          id="bfc-lux-1"
+          data-champion="lux"
+          data-tags="burst mage artillery"
+          data-votes="234"
+          data-rating="4.7"
+          data-comments="3"
+          data-spicy="0"
+        >
+          <div class="feed-featured-ribbon">⭐ Featured</div>
+          <div class="feed-card-top">
+            <div class="feed-champ-badge">
+              <img src="https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Lux.png"
+                   alt="Lux" class="feed-champ-icon" />
+              <div>
+                <div class="feed-champ-name">Lux</div>
+                <div class="feed-champ-roles">Mage · Support</div>
+              </div>
+            </div>
+            <div class="feed-card-votes">
+              <div class="feed-spicy-vote">
+                <button class="feed-spicy-btn" data-spicy-build="lux-1" aria-label="Mark as Spicy">🌶️</button>
+                <span class="feed-spicy-count" id="fsp-lux-1">0</span>
+                <div class="feed-spice-level" id="fsl-lux-1"></div>
+              </div>
+              <div class="feed-vote">
+                <button class="feed-vote-btn" data-build="lux-1" aria-label="Upvote">▲</button>
+                <span class="feed-vote-count" id="fv-lux-1">234</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-body">
+            <div class="feed-build-title">Full AP Burst Lux — One-Shot Everything</div>
+            <div class="feed-meta-row">
+              <span class="feed-stars" aria-label="4.7 out of 5">
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star">★</span>
+              </span>
+              <span class="feed-author">by <strong>IceBridgeCarry</strong></span>
+              <span class="feed-patch">14.8</span>
+            </div>
+            <div class="build-tags">
+              <span class="build-tag">Lux</span>
+              <span class="build-tag">Mage</span>
+              <span class="build-tag">New!</span>
+            </div>
+            <div>
+              <div class="build-section-label">Items</div>
+              <div class="feed-items-row">
+                <span class="feed-item-chip">Shadowflame</span>
+                <span class="feed-item-chip">Rabadon's</span>
+                <span class="feed-item-chip">Void Staff</span>
+                <span class="feed-item-more">+3 more</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-footer">
+            <span class="feed-comments">💬 3 comments</span>
+            <a href="build-detail.html?build=lux-1" class="btn btn-primary btn-sm" id="view-lux-1">View Build →</a>
+          </div>
+        </article>
+
+        <!-- ── JINX: Crit ramp ── -->
+        <article
+          class="build-feed-card reveal"
+          id="bfc-jinx-1"
+          data-champion="jinx"
+          data-tags="burst exodia marksman"
+          data-votes="186"
+          data-rating="4.4"
+          data-comments="3"
+          data-spicy="4"
+        >
+          <div class="feed-card-top">
+            <div class="feed-champ-badge">
+              <img src="https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Jinx.png"
+                   alt="Jinx" class="feed-champ-icon" />
+              <div>
+                <div class="feed-champ-name">Jinx</div>
+                <div class="feed-champ-roles">Marksman</div>
+              </div>
+            </div>
+            <div class="feed-card-votes">
+              <div class="feed-spicy-vote">
+                <button class="feed-spicy-btn" data-spicy-build="jinx-1" aria-label="Mark as Spicy">🌶️</button>
+                <span class="feed-spicy-count has-votes" id="fsp-jinx-1">228</span>
+                <div class="feed-spice-level" id="fsl-jinx-1" title="Triple Spicy!">🌶️🌶️🌶️</div>
+              </div>
+              <div class="feed-vote">
+                <button class="feed-vote-btn" data-build="jinx-1" aria-label="Upvote">▲</button>
+                <span class="feed-vote-count" id="fv-jinx-1">186</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-body">
+            <div class="feed-build-title">Rocket Rampage — Crit &amp; Reset Chaos</div>
+            <div class="feed-meta-row">
+              <span class="feed-stars" aria-label="4.4 out of 5">
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star">★</span>
+              </span>
+              <span class="feed-author">by <strong>NineTailsGG</strong></span>
+              <span class="feed-patch">14.8</span>
+            </div>
+            <div class="build-tags">
+              <span class="build-tag">Jinx</span>
+              <span class="build-tag">Marksman</span>
+              <span class="build-tag">New!</span>
+            </div>
+            <div>
+              <div class="build-section-label">Items</div>
+              <div class="feed-items-row">
+                <span class="feed-item-chip">Kraken Slayer</span>
+                <span class="feed-item-chip">Runaan's</span>
+                <span class="feed-item-chip">Infinity Edge</span>
+                <span class="feed-item-more">+3 more</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-footer">
+            <span class="feed-comments">💬 3 comments</span>
+            <a href="build-detail.html?build=jinx-1" class="btn btn-primary btn-sm" id="view-jinx-1">View Build →</a>
+          </div>
+        </article>
+
+        <!-- ── MALPHITE: Tank frontline ── -->
+        <article
+          class="build-feed-card reveal"
+          id="bfc-malphite-1"
+          data-champion="malphite"
+          data-tags="tank brawler"
+          data-votes="149"
+          data-rating="4.0"
+          data-comments="2"
+          data-spicy="2"
+        >
+          <div class="feed-card-top">
+            <div class="feed-champ-badge">
+              <img src="https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Malphite.png"
+                   alt="Malphite" class="feed-champ-icon" />
+              <div>
+                <div class="feed-champ-name">Malphite</div>
+                <div class="feed-champ-roles">Tank · Fighter</div>
+              </div>
+            </div>
+            <div class="feed-card-votes">
+              <div class="feed-spicy-vote">
+                <button class="feed-spicy-btn" data-spicy-build="malphite-1" aria-label="Mark as Spicy">🌶️</button>
+                <span class="feed-spicy-count has-votes" id="fsp-malphite-1">112</span>
+                <div class="feed-spice-level" id="fsl-malphite-1" title="Double Spicy!">🌶️🌶️</div>
+              </div>
+              <div class="feed-vote">
+                <button class="feed-vote-btn" data-build="malphite-1" aria-label="Upvote">▲</button>
+                <span class="feed-vote-count" id="fv-malphite-1">149</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-body">
+            <div class="feed-build-title">Monolith Frontline — Unkillable CC Tank</div>
+            <div class="feed-meta-row">
+              <span class="feed-stars" aria-label="4.0 out of 5">
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star">★</span>
+              </span>
+              <span class="feed-author">by <strong>GalacticAbyss</strong></span>
+              <span class="feed-patch">14.8</span>
+            </div>
+            <div class="build-tags">
+              <span class="build-tag">Malphite</span>
+              <span class="build-tag">Tank</span>
+              <span class="build-tag">New!</span>
+            </div>
+            <div>
+              <div class="build-section-label">Items</div>
+              <div class="feed-items-row">
+                <span class="feed-item-chip">Sunfire Aegis</span>
+                <span class="feed-item-chip">Frozen Heart</span>
+                <span class="feed-item-chip">Thornmail</span>
+                <span class="feed-item-more">+3 more</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-footer">
+            <span class="feed-comments">💬 2 comments</span>
+            <a href="build-detail.html?build=malphite-1" class="btn btn-primary btn-sm" id="view-malphite-1">View Build →</a>
+          </div>
+        </article>
+
+        <!-- ── THRESH: Support picks ── -->
+        <article
+          class="build-feed-card reveal"
+          id="bfc-thresh-1"
+          data-champion="thresh"
+          data-tags="support poke"
+          data-votes="121"
+          data-rating="3.9"
+          data-comments="2"
+          data-spicy="1"
+        >
+          <div class="feed-card-top">
+            <div class="feed-champ-badge">
+              <img src="https://ddragon.leagueoflegends.com/cdn/14.8.1/img/champion/Thresh.png"
+                   alt="Thresh" class="feed-champ-icon" />
+              <div>
+                <div class="feed-champ-name">Thresh</div>
+                <div class="feed-champ-roles">Support · Fighter</div>
+              </div>
+            </div>
+            <div class="feed-card-votes">
+              <div class="feed-spicy-vote">
+                <button class="feed-spicy-btn" data-spicy-build="thresh-1" aria-label="Mark as Spicy">🌶️</button>
+                <span class="feed-spicy-count has-votes" id="fsp-thresh-1">62</span>
+                <div class="feed-spice-level" id="fsl-thresh-1" title="Spicy!">🌶️</div>
+              </div>
+              <div class="feed-vote">
+                <button class="feed-vote-btn" data-build="thresh-1" aria-label="Upvote">▲</button>
+                <span class="feed-vote-count" id="fv-thresh-1">121</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-body">
+            <div class="feed-build-title">Depth Charge — Hooks, Flays &amp; Lantern Saves</div>
+            <div class="feed-meta-row">
+              <span class="feed-stars" aria-label="3.9 out of 5">
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
+                <span class="feed-star">★</span>
+              </span>
+              <span class="feed-author">by <strong>HolyAbyss</strong></span>
+              <span class="feed-patch">14.8</span>
+            </div>
+            <div class="build-tags">
+              <span class="build-tag">Thresh</span>
+              <span class="build-tag">Support</span>
+              <span class="build-tag">New!</span>
+            </div>
+            <div>
+              <div class="build-section-label">Items</div>
+              <div class="feed-items-row">
+                <span class="feed-item-chip">Zeke's Convergence</span>
+                <span class="feed-item-chip">Knight's Vow</span>
+                <span class="feed-item-chip">Thornmail</span>
+                <span class="feed-item-more">+3 more</span>
+              </div>
+            </div>
+          </div>
+          <div class="feed-card-footer">
+            <span class="feed-comments">💬 2 comments</span>
+            <a href="build-detail.html?build=thresh-1" class="btn btn-primary btn-sm" id="view-thresh-1">View Build →</a>
+          </div>
+        </article>
+
+        <!-- No results message (hidden by default) -->
+        <p class="no-builds-msg" id="noBuildsMsg" style="display:none;">
+          No builds match your filters. Try a different combination! 🔍
+        </p>
+
+      </div><!-- /builds-feed-grid -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- ===================================================
+       SUBMIT YOUR BUILD CTA
+  ==================================================== -->
+  <section class="submit-cta-section" id="submit-cta">
+    <div class="container">
+      <div class="submit-cta-inner">
+        <div class="submit-cta-icon">✦</div>
+        <h2 class="submit-cta-title">Have a Build That Works?</h2>
+        <p class="submit-cta-sub">
+          Share your ARAM Mayhem strategy with other players.
+          Whether it's a cheesy off-meta pick or a polished meta build —
+          every insight makes the Howling Abyss better for everyone.
+        </p>
+        <a href="create.html" class="btn btn-primary" id="cta-submit-btn">+ Submit Your Build</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================
+       FOOTER
+  ==================================================== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo footer-logo" id="footer-logo">
+            <span class="logo-icon">⚔</span>
+            <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+          </a>
+          <p class="footer-tagline">
+            The premier resource for League of Legends ARAM Mayhem players.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="builds.html">Builds</a></li>
+            <li><a href="create.html">Submit Build</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Champions</h4>
+          <ul>
+            <li><a href="champion-detail.html?champion=lux">Lux</a></li>
+            <li><a href="champion-detail.html?champion=jinx">Jinx</a></li>
+            <li><a href="champion-detail.html?champion=malphite">Malphite</a></li>
+            <li><a href="champion-detail.html?champion=thresh">Thresh</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">
+          ARAM Bound is a fan-made website not affiliated with Riot Games.
+          League of Legends © Riot Games, Inc. All champion images © Riot Games.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/champions-data.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  /* ============================================================
+     BUILDS PAGE — Filter, Search & Sort Logic
+  ============================================================ */
+  'use strict';
+
+  const cards     = Array.from(document.querySelectorAll('.build-feed-card'));
+  const noMsg     = document.getElementById('noBuildsMsg');
+  const countEl   = document.getElementById('countVisible');
+
+  let activeChamp  = 'all';
+  let activeTag    = 'all';
+  let searchQuery  = '';
+  let sortMode     = 'votes';
+
+  /* ── Apply all active filters + sort ─────────────────── */
+  function applyFilters() {
+    let visible = 0;
+
+    cards.forEach(card => {
+      const champ   = card.getAttribute('data-champion') || '';
+      const tags    = card.getAttribute('data-tags')     || '';
+      const title   = card.querySelector('.feed-build-title')?.textContent.toLowerCase() || '';
+
+      const champOk  = activeChamp === 'all' || champ === activeChamp;
+      const tagOk    = activeTag   === 'all' || tags.includes(activeTag);
+      const searchOk = title.includes(searchQuery.toLowerCase().trim());
+
+      const show = champOk && tagOk && searchOk;
+      card.classList.toggle('hidden', !show);
+      if (show) visible++;
+    });
+
+    if (countEl) countEl.textContent = visible;
+    if (noMsg)   noMsg.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  /* ── Sort the grid ────────────────────────────────────── */
+  function applySort() {
+    const grid = document.getElementById('buildsGrid');
+    if (!grid) return;
+    const sorted = cards.slice().sort((a, b) => {
+      if (sortMode === 'votes')    return parseFloat(b.getAttribute('data-votes'))    - parseFloat(a.getAttribute('data-votes'));
+      if (sortMode === 'spicy')    return parseFloat(b.getAttribute('data-spicy'))    - parseFloat(a.getAttribute('data-spicy'));
+      if (sortMode === 'comments') return parseFloat(b.getAttribute('data-comments')) - parseFloat(a.getAttribute('data-comments'));
+      return 0;
+    });
+    sorted.forEach(card => grid.appendChild(card)); // re-order in DOM
+    // Also move no-results msg to end
+    if (noMsg) grid.appendChild(noMsg);
+    applyFilters();
+  }
+
+  /* ── Champion Dropdown ────────────────────────────────── */
+  const champDD      = document.getElementById('champDropdown');
+  const champDDBut   = document.getElementById('champDropdownBtn');
+  const champDDList  = document.getElementById('champDropdownList');
+  const champDDIcon  = document.getElementById('champDdIcon');
+  const champDDLabel = document.getElementById('champDdLabel');
+  const champDDCount = document.getElementById('champDdCount');
+
+  function selectChamp(item) {
+    const champ   = item.getAttribute('data-champ');
+    const imgEl   = item.querySelector('img');
+    const labelEl = item.querySelector('.champ-dd-name') || item.querySelectorAll('span')[1] || item.querySelectorAll('span')[0];
+    const countEl = item.querySelector('.filter-count');
+
+    if (champDDIcon) {
+      champDDIcon.innerHTML = imgEl
+        ? `<img src="${imgEl.src}" alt="${imgEl.alt}" style="width:22px;height:22px;border-radius:4px;object-fit:cover;display:block;" />`
+        : '⚔️';
+    }
+    if (champDDLabel && labelEl) champDDLabel.textContent = labelEl.textContent.trim();
+    if (champDDCount && countEl) champDDCount.textContent = countEl.textContent.trim();
+
+    champDDList.querySelectorAll('.champ-dropdown-item').forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    activeChamp = champ;
+    applyFilters();
+    champDD.classList.remove('open');
+    if (champDDBut) champDDBut.setAttribute('aria-expanded', 'false');
+  }
+
+  if (champDDBut) {
+    champDDBut.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = champDD.classList.toggle('open');
+      champDDBut.setAttribute('aria-expanded', String(isOpen));
+    });
+  }
+
+  if (champDDList) {
+    champDDList.querySelectorAll('.champ-dropdown-item').forEach(item => {
+      item.addEventListener('click', () => selectChamp(item));
+    });
+  }
+
+  document.addEventListener('click', () => {
+    if (champDD) {
+      champDD.classList.remove('open');
+      if (champDDBut) champDDBut.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+
+  /* ── Tag filter buttons ───────────────────────────────── */
+  document.querySelectorAll('[data-tag]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-tag]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeTag = btn.getAttribute('data-tag');
+      applyFilters();
+    });
+  });
+
+  /* ── Live search ──────────────────────────────────────── */
+  const searchInput = document.getElementById('buildSearch');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value;
+      applyFilters();
+    });
+  }
+
+  /* ── Sort select ──────────────────────────────────────── */
+  const sortSelect = document.getElementById('sortSelect');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', () => {
+      sortMode = sortSelect.value;
+      applySort();
+    });
+  }
+
+  /* ── Upvote buttons ───────────────────────────────────── */
+  document.querySelectorAll('.feed-vote-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key     = btn.getAttribute('data-build');
+      const countEl = document.getElementById('fv-' + key);
+      if (!countEl) return;
+      const voted = btn.classList.toggle('voted');
+      const n     = parseInt(countEl.textContent, 10);
+      countEl.textContent = voted ? n + 1 : n - 1;
+      // Update card's data-votes for re-sorting
+      btn.closest('[data-votes]')?.setAttribute('data-votes', voted ? n + 1 : n - 1);
+    });
+  });
+
+  /* ── Spicy buttons 🌶️ + Spice Level ────────────────── */
+  function updateSpiceLevel(key, count) {
+    const el = document.getElementById('fsl-' + key);
+    if (!el) return;
+    if (count >= 200) {
+      el.textContent = '🌶️🌶️🌶️';
+      el.title = 'Triple Spicy! (200+ spice votes)';
+    } else if (count >= 100) {
+      el.textContent = '🌶️🌶️';
+      el.title = 'Double Spicy! (100+ spice votes)';
+    } else if (count >= 50) {
+      el.textContent = '🌶️';
+      el.title = 'Spicy! (50+ spice votes)';
+    } else {
+      el.textContent = '';
+      el.title = '';
+    }
+  }
+
+  // Init spice levels on page load from pre-seeded counts
+  ['lux-1','jinx-1','malphite-1','thresh-1'].forEach(key => {
+    const c = document.getElementById('fsp-' + key);
+    if (c) updateSpiceLevel(key, parseInt(c.textContent, 10) || 0);
+  });
+
+  document.querySelectorAll('.feed-spicy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key     = btn.getAttribute('data-spicy-build');
+      const countEl = document.getElementById('fsp-' + key);
+      if (!countEl) return;
+      const spiced = btn.classList.toggle('spiced');
+      const n      = parseInt(countEl.textContent, 10);
+      const newN   = spiced ? n + 1 : Math.max(0, n - 1);
+      countEl.textContent = newN;
+      countEl.classList.toggle('has-votes', newN > 0);
+      updateSpiceLevel(key, newN);
+      // Nudge card's data-spicy for live sort
+      const card = btn.closest('[data-spicy]');
+      if (card) {
+        const cur = parseFloat(card.getAttribute('data-spicy'));
+        card.setAttribute('data-spicy', spiced ? cur + 0.5 : Math.max(0, cur - 0.5));
+      }
+    });
+  });
+
+
+  /* ── Nav search wired to builds filter ──────────────────── */
+  const navSearchInput = document.getElementById('navSearch');
+  if (navSearchInput) {
+    navSearchInput.addEventListener('input', () => {
+      searchQuery = navSearchInput.value;
+      if (searchInput) searchInput.value = navSearchInput.value;
+      applyFilters();
+    });
+  }
+
+  /* ── Read ?search= from URL on page load ─────────────────── */
+  const urlQ = new URLSearchParams(window.location.search).get('search');
+  if (urlQ) {
+    searchQuery = urlQ;
+    if (searchInput)    { searchInput.value    = urlQ; }
+    if (navSearchInput) { navSearchInput.value = urlQ; }
+    applyFilters();
+  }
+
+  function resolveBuildChampionSlug(b) {
+    if (b.championKey && typeof b.championKey === 'string') return b.championKey;
+    const name = (b.champName || '').trim().toLowerCase();
+    if (typeof ARAM_CHAMPIONS !== 'undefined') {
+      const found = ARAM_CHAMPIONS.find((c) => c.name.toLowerCase() === name);
+      if (found) return found.id;
+    }
+    return (b.champName || '').toLowerCase().replace(/\s+/g, '');
+  }
+
+  function populateChampionDropdown() {
+    if (!champDDList || typeof ARAM_CHAMPIONS === 'undefined') return;
+
+    const counts = {};
+    cards.forEach((card) => {
+      const k = card.getAttribute('data-champion') || '';
+      if (!k) return;
+      counts[k] = (counts[k] || 0) + 1;
+    });
+
+    const total = cards.length;
+
+    function esc(t) {
+      const d = document.createElement('div');
+      d.textContent = t;
+      return d.innerHTML;
+    }
+
+    let html = `
+          <li class="champ-dropdown-item active" data-champ="all" role="option">
+            <span style="font-size:1.1rem;line-height:1;">⚔️</span>
+            <span class="champ-dd-name">All Champions</span>
+            <span class="filter-count">${total}</span>
+          </li>`;
+
+    ARAM_CHAMPIONS.slice()
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .forEach((c) => {
+        const n = counts[c.id] || 0;
+        html += `
+          <li class="champ-dropdown-item" data-champ="${esc(c.id)}" role="option">
+            <img src="${esc(c.icon)}" alt="${esc(c.name)}" />
+            <span class="champ-dd-name">${esc(c.name)}</span>
+            <span class="filter-count">${n}</span>
+          </li>`;
+      });
+
+    champDDList.innerHTML = html;
+    if (champDDCount) champDDCount.textContent = String(total);
+    champDDList.querySelectorAll('.champ-dropdown-item').forEach((item) => {
+      item.addEventListener('click', () => selectChamp(item));
+    });
+  }
+
+  /* ── Load and inject user-submitted builds ───────────────── */
+  (function injectUserBuilds() {
+    let stored = {};
+    try { stored = JSON.parse(localStorage.getItem('arambound_user_builds') || '{}'); } catch {}
+    const userIds = Object.keys(stored);
+    if (!userIds.length) return;
+
+    const grid = document.getElementById('buildsGrid');
+    const noMsg = document.getElementById('noBuildsMsg');
+    if (!grid) return;
+
+    userIds.forEach((buildId) => {
+      const b = stored[buildId];
+      if (!b || !b.title) return;
+
+      const champId = resolveBuildChampionSlug(b);
+      const firstItems = (b.items || []).slice(0, 3);
+      const extraCount = Math.max(0, (b.items || []).length - 3);
+      const tagsAttr = (b.tags || []).map(t => t.toLowerCase().replace(/\s+/g,'-')).join(' ');
+
+      const article = document.createElement('article');
+      article.className = 'build-feed-card reveal';
+      article.setAttribute('data-champion', champId);
+      article.setAttribute('data-tags', tagsAttr);
+      article.setAttribute('data-votes', '0');
+      article.setAttribute('data-rating', '0');
+      article.setAttribute('data-comments', '0');
+      article.setAttribute('data-spicy', '0');
+
+      const champIcon = b.champIcon
+        ? `<img src="${b.champIcon}" alt="${b.champName}" class="feed-champ-icon" />`
+        : `<span style="font-size:1.4rem;">⚔️</span>`;
+
+      const itemChips = firstItems
+        .map(name => `<span class="feed-item-chip">${name}</span>`)
+        .join('');
+      const extraChip = extraCount > 0
+        ? `<span class="feed-item-more">+${extraCount} more</span>`
+        : '';
+
+      article.innerHTML = `
+        <div class="feed-card-top">
+          <div class="feed-champ-badge">
+            ${champIcon}
+            <div>
+              <div class="feed-champ-name">${b.champName || 'Unknown'}</div>
+              <div class="feed-champ-roles">${b.champRole || ''}</div>
+            </div>
+          </div>
+          <div class="feed-card-votes">
+            <div class="feed-vote">
+              <button class="feed-vote-btn" data-build="${buildId}" aria-label="Upvote">▲</button>
+              <span class="feed-vote-count" id="fv-${buildId}">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="feed-card-body">
+          <div class="feed-build-title">${b.title}</div>
+          <div class="feed-meta-row">
+            <span class="feed-author">by <strong>${b.author || 'You'}</strong></span>
+            <span class="feed-patch">Patch ${b.patch || ''}</span>
+            <span class="build-tag" style="background:var(--gold-dark,#c89b3c22);color:var(--gold,#c89b3c);border-color:var(--gold,#c89b3c);">✦ Your Build</span>
+          </div>
+          <div class="build-tags">
+            ${(b.tags || []).map(t => `<span class="build-tag">${t}</span>`).join('')}
+          </div>
+          <div>
+            <div class="build-section-label">Items</div>
+            <div class="feed-items-row">
+              ${itemChips || '<span class="feed-item-chip" style="opacity:.5;">No items added</span>'}
+              ${extraChip}
+            </div>
+          </div>
+        </div>
+        <div class="feed-card-footer">
+          <span class="feed-comments">💬 0 comments</span>
+          <a href="build-detail.html?build=${encodeURIComponent(buildId)}" class="btn btn-primary btn-sm">View Build →</a>
+        </div>
+      `;
+
+      // Insert before the no-results message
+      if (noMsg && noMsg.parentNode === grid) {
+        grid.insertBefore(article, noMsg);
+      } else {
+        grid.appendChild(article);
+      }
+
+      // Wire the upvote button
+      const voteBtn = article.querySelector('.feed-vote-btn');
+      if (voteBtn) {
+        voteBtn.addEventListener('click', () => {
+          const countEl = document.getElementById('fv-' + buildId);
+          if (!countEl) return;
+          const voted = voteBtn.classList.toggle('voted');
+          const n = parseInt(countEl.textContent, 10);
+          countEl.textContent = voted ? n + 1 : n - 1;
+          article.setAttribute('data-votes', voted ? n + 1 : n - 1);
+        });
+      }
+
+      // Push into the cards array so filters/sort include user builds
+      cards.push(article);
+    });
+
+    // Update the total count in the results bar
+    const totalEl = document.querySelector('#resultsCount strong:nth-of-type(2)');
+    if (totalEl) totalEl.textContent = cards.length;
+
+    // Re-run filters to include the new cards in the count
+    applyFilters();
+  })();
+
+  populateChampionDropdown();
+
+  </script>
+</body>
+</html>
+

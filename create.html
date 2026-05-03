@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Build — ARAM Bound | ARAM Mayhem Build Editor</title>
+  <meta name="description" content="Create and submit an ARAM Mayhem build guide: overview, item paths with alternate routes, and situational notes." />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo" id="nav-logo">
+        <span class="logo-icon">⚔</span>
+        <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"     class="nav-link"        id="nav-home">Home</a></li>
+        <li><a href="champions.html" class="nav-link"        id="nav-champions">Champions</a></li>
+        <li><a href="builds.html"    class="nav-link active" id="nav-builds">Builds</a></li>
+      </ul>
+      <div class="nav-search-wrap" id="navSearchWrap">
+        <input type="search" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
+        <button type="button" class="nav-search-submit" id="navSearchBtn" aria-label="Search">&#x1F50D;</button>
+      </div>
+      <div class="nav-actions">
+        <a href="create.html" class="btn btn-primary" id="nav-submit-btn">+ Submit Build</a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-hero" id="page-hero">
+    <div class="page-hero-ornament page-hero-ornament--left"></div>
+    <div class="page-hero-ornament page-hero-ornament--right"></div>
+    <div class="page-hero-content">
+      <nav class="page-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="page-breadcrumb-sep">›</span>
+        <a href="builds.html">Builds</a>
+        <span class="page-breadcrumb-sep">›</span>
+        <span>Submit Build</span>
+      </nav>
+      <h1 class="page-hero-title">Create a Build Guide</h1>
+      <p class="page-hero-sub">
+        Draft the same sections players see on a published guide. Start with your overview
+        and core item path — more sections will plug in here later.
+      </p>
+    </div>
+  </header>
+
+  <main class="bd-page create-page" id="create-main">
+    <form id="createBuildForm" class="create-form" novalidate>
+      <input type="hidden" name="build_title" id="createBuildTitle" value="" />
+
+      <!-- CHAMPION & SUMMONERS -->
+      <section class="bd-section create-section reveal" id="create-loadout">
+        <h2 class="bd-section-title">🏆 Champion &amp; summoners</h2>
+        <p class="create-intro">
+          Choose your champion and two summoner spells you recommend
+          for ARAM Mayhem.
+        </p>
+        <p class="create-intro create-intro--link">
+          <a
+            href="https://wiki.leagueoflegends.com/en-us/Summoner_spell"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Summoner spells — League of Legends Wiki</a>
+        </p>
+
+        <input type="hidden" name="champion" id="createChampionId" value="" />
+
+        <div class="create-loadout-champ-block">
+          <span class="create-field-label">Champion</span>
+          <div class="create-loadout-champ-layout create-loadout-champ-picked">
+            <img
+              id="createChampSelectedImg"
+              class="create-loadout-champ-picked-img"
+              alt=""
+              width="48"
+              height="48"
+              decoding="async"
+              hidden
+            />
+            <div class="create-loadout-champ-col">
+              <div id="createChampSummary" class="create-loadout-champ-summary" hidden>
+                <span id="createChampSelectedName" class="create-loadout-champ-picked-name"></span>
+                <button type="button" class="btn btn-ghost btn-sm" id="createChampClear">Change champion</button>
+              </div>
+              <div id="createChampSearchWrap" class="create-item-search create-champ-search-host">
+                <input
+                  type="search"
+                  id="createChampSearchInput"
+                  class="create-item-search-input"
+                  placeholder="Search champions by name…"
+                  autocomplete="off"
+                  aria-label="Search champions"
+                  aria-controls="createChampSearchResults"
+                  aria-expanded="false"
+                />
+                <div id="createChampSearchResults" class="create-item-search-results" hidden role="listbox"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="create-loadout-summoners">
+          <label class="create-field create-loadout-spell-field">
+            <span class="create-field-label">Summoner 1</span>
+            <div class="create-loadout-spell-row">
+              <img
+                id="createSummoner1Img"
+                class="create-loadout-spell-icon"
+                alt=""
+                width="40"
+                height="40"
+                hidden
+                loading="eager"
+                decoding="async"
+                referrerpolicy="no-referrer"
+              />
+              <select id="createSummoner1" name="summoner1" class="create-input create-loadout-select" aria-label="First summoner spell">
+                <option value="">Select summoner…</option>
+                <option value="snowball">Snowball</option>
+                <option value="clarity">Clarity</option>
+                <option value="ignite">Ignite</option>
+                <option value="flash">Flash</option>
+                <option value="ghost">Ghost</option>
+                <option value="heal">Heal</option>
+                <option value="cleanse">Cleanse</option>
+              </select>
+            </div>
+          </label>
+          <label class="create-field create-loadout-spell-field">
+            <span class="create-field-label">Summoner 2</span>
+            <div class="create-loadout-spell-row">
+              <img
+                id="createSummoner2Img"
+                class="create-loadout-spell-icon"
+                alt=""
+                width="40"
+                height="40"
+                hidden
+                loading="eager"
+                decoding="async"
+                referrerpolicy="no-referrer"
+              />
+              <select id="createSummoner2" name="summoner2" class="create-input create-loadout-select" aria-label="Second summoner spell">
+                <option value="">Select summoner…</option>
+                <option value="snowball">Snowball</option>
+                <option value="clarity">Clarity</option>
+                <option value="ignite">Ignite</option>
+                <option value="flash">Flash</option>
+                <option value="ghost">Ghost</option>
+                <option value="heal">Heal</option>
+                <option value="cleanse">Cleanse</option>
+              </select>
+            </div>
+          </label>
+        </div>
+      </section>
+
+      <!-- OVERVIEW -->
+      <section class="bd-section create-section reveal" id="create-overview">
+        <h2 class="bd-section-title">📋 Overview</h2>
+        <p class="create-intro">
+          This box is where your <strong>published Overview</strong> will come from. Start by writing a
+          <strong>quick summary of your build</strong> and <strong>what you aim to accomplish during gameplay</strong>
+          (for example: burst squishies, peel for your carry, or constant poke). Replace this working draft with your
+          final wording when you are ready — it will appear as the italic summary on your guide.
+        </p>
+        <div class="create-field create-tag-pair" role="group" aria-label="Build tags">
+          <span class="create-field-label">Build tag</span>
+          <div class="create-tag-row">
+            <label class="create-field create-field--tag">
+              <span class="create-field-label create-field-label--sub">Role</span>
+              <select
+                id="createRoleTag"
+                name="build_role"
+                class="create-input create-loadout-select"
+                aria-label="Class role for this build"
+              >
+                <option value="">— None —</option>
+              </select>
+            </label>
+            <label class="create-field create-field--tag">
+              <span class="create-field-label create-field-label--sub">Playstyle</span>
+              <select
+                id="createPlaystyleTag"
+                name="build_playstyle"
+                class="create-input create-loadout-select"
+                aria-label="Playstyle tag for this build"
+              >
+                <option value="">— None —</option>
+              </select>
+            </label>
+          </div>
+          <span class="create-field-hint">
+            Pick <strong>one role</strong> (required). <strong>Playstyle</strong> is optional — choose <strong>— None —</strong> if you prefer not to tag one (same options as the Champions page).
+          </span>
+        </div>
+        <label class="create-field">
+          <span class="create-field-label">Overview text</span>
+          <textarea
+            id="overviewSummary"
+            name="overview"
+            class="create-textarea create-textarea--overview"
+            rows="7"
+            spellcheck="true"
+            placeholder="Write a quick summary of your build and its stated goal during gameplay (what you want to achieve in fights and how the build supports that). This placeholder is replaced by your real overview text when you publish."
+          ></textarea>
+        </label>
+      </section>
+
+      <!-- ITEM PATHS -->
+      <section class="bd-section create-section reveal" id="create-items">
+        <h2 class="bd-section-title">⚔ Item Build Path</h2>
+        <p class="create-intro">
+          Build your <strong>core item order</strong> with live icons from Data Dragon. Add
+          <strong>alternate paths</strong> when a different order fits specific matchups (for example
+          against tanks or a pure ranged comp). Hover an icon to see the full item name.
+        </p>
+        <p id="create-items-error" class="create-error" role="alert" hidden></p>
+
+        <div class="create-path-block" data-path-key="main">
+          <div class="bd-subsection-title">Core path</div>
+          <label class="create-field">
+            <span class="create-field-label">When is this path best?</span>
+            <textarea
+              name="main_usecase"
+              class="create-textarea"
+              rows="3"
+              placeholder="Describe the team comps or game states where this core order is the right default (e.g. balanced enemy teams, standard poke windows)."
+            ></textarea>
+          </label>
+          <label class="create-field">
+            <span class="create-field-label">Situational notes (optional)</span>
+            <input
+              type="text"
+              name="main_notes"
+              class="create-input"
+              placeholder="e.g. Against heavy MR, swap Cryptbloom → Void Staff earlier."
+            />
+          </label>
+          <div class="bd-subsection-title" style="margin-top: 4px;">Items (max 6)</div>
+          <div class="create-item-row-host">
+            <p class="create-loading">Loading item data…</p>
+          </div>
+          <div class="create-item-search">
+            <input
+              type="search"
+              class="create-item-search-input"
+              placeholder="Search items by name to add to this path…"
+              autocomplete="off"
+              aria-label="Search items to add to core path"
+            />
+            <div class="create-item-search-results" hidden></div>
+          </div>
+        </div>
+
+        <div id="create-alt-paths" class="create-alt-paths" aria-live="polite"></div>
+
+        <button type="button" class="btn btn-outline" id="addAltPath" disabled>
+          + Add alternate build path
+        </button>
+      </section>
+
+      <!-- AUGMENTS (Top picks per tier) -->
+      <section class="bd-section create-section reveal" id="create-augments">
+        <h2 class="bd-section-title">✦ Favorite Augments</h2>
+        <p class="create-intro">
+          Pick your <strong>top 4 Prismatic</strong>, <strong>top 4 Gold</strong>, and <strong>top 4 Silver</strong>
+          augments for this build. In-game, augment <strong>colors/tiers are random</strong> — each row has a <strong>BiS</strong>
+          checkbox you can <strong>check or uncheck</strong>. Only <strong>four</strong> slots may be marked BiS at a time (counted across every tier).
+          Uncheck a BiS if you want to pick a different slot.
+        </p>
+        <p class="create-intro create-intro--link">
+          <a
+            href="https://wiki.leagueoflegends.com/en-us/ARAM:_Mayhem/Augments"
+            target="_blank"
+            rel="noopener noreferrer"
+          >ARAM: Mayhem augments — League of Legends Wiki</a>
+        </p>
+        <p id="create-augments-error" class="create-error" role="alert" hidden></p>
+        <p id="create-bis-count-hint" class="create-bis-count-hint" aria-live="polite">
+          BiS checkboxes: <strong id="create-bis-count-num">0</strong>/4 checked (max across all 12 augments).
+          <span id="create-bis-cap-note" class="create-bis-cap-note" hidden> Uncheck one to mark another slot.</span>
+        </p>
+
+        <!-- Prismatic -->
+        <div class="create-augment-group" data-tier="prismatic">
+          <div class="create-augment-group-head">
+            <h3 class="create-augment-group-title">Top 4 Prismatic</h3>
+          </div>
+          <div class="create-augment-grid" aria-label="Top Prismatic augments">
+            <div class="create-augment-card" data-augment-slot="p1">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Prismatic #1</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Prismatic augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="prismatic:0" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="p2">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Prismatic #2</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Prismatic augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="prismatic:1" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="p3">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Prismatic #3</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Prismatic augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="prismatic:2" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="p4">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Prismatic #4</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Prismatic augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="prismatic:3" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gold -->
+        <div class="create-augment-group" data-tier="gold">
+          <div class="create-augment-group-head">
+            <h3 class="create-augment-group-title">Top 4 Gold</h3>
+          </div>
+          <div class="create-augment-grid" aria-label="Top Gold augments">
+            <div class="create-augment-card" data-augment-slot="g1">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Gold #1</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Gold augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="gold:0" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="g2">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Gold #2</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Gold augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="gold:1" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="g3">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Gold #3</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Gold augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="gold:2" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="g4">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Gold #4</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Gold augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="gold:3" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Silver -->
+        <div class="create-augment-group" data-tier="silver">
+          <div class="create-augment-group-head">
+            <h3 class="create-augment-group-title">Top 4 Silver</h3>
+          </div>
+          <div class="create-augment-grid" aria-label="Top Silver augments">
+            <div class="create-augment-card" data-augment-slot="s1">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Silver #1</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Silver augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="silver:0" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="s2">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Silver #2</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Silver augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="silver:1" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="s3">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Silver #3</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Silver augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="silver:2" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+            <div class="create-augment-card" data-augment-slot="s4">
+              <div class="create-augment-card-head">
+                <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
+                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
+                </div>
+                <span class="create-augment-pick-label">Silver #4</span>
+              </div>
+              <div class="create-augment-card-body">
+                <p class="create-augment-name" data-role="name">Choose a Silver augment…</p>
+                <select class="create-augment-select" data-role="select">
+                  <option value="">Select augment…</option>
+                </select>
+                <label class="create-augment-bis-label">
+                  <input type="checkbox" class="create-augment-bis-cb" data-bis-key="silver:3" aria-label="Toggle BiS for this augment—up to 4 checked total across all augments" />
+                  <span class="create-augment-bis-text">BiS</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Published guide preview (same layout as build-detail after submit) -->
+      <section class="bd-section create-section reveal" id="create-published-preview" aria-labelledby="create-preview-heading">
+        <h2 class="bd-section-title" id="create-preview-heading">Published guide preview</h2>
+        <p class="create-intro">
+          Live preview using the <strong>same layout</strong> as a submitted build: Data Dragon item icons, all augment slots, BiS ring, and the “Top 4 BiS to chase” strip.
+        </p>
+        <div class="create-preview-block" id="create-preview-core-wrap">
+          <div class="bd-subsection-title">When this path is best</div>
+          <p class="create-preview-usecase" id="create-preview-core-usecase" hidden></p>
+          <div class="bd-subsection-title" style="margin-top: 12px">Core item path</div>
+          <p class="create-preview-empty" id="create-preview-items-empty">Add items in the section above to see the published item row with icons.</p>
+          <div id="create-preview-items-path" class="create-preview-items-host" hidden></div>
+          <p class="create-preview-items-note" id="create-preview-items-note" hidden></p>
+        </div>
+        <div class="create-preview-block" id="create-preview-aug-wrap">
+          <p class="bd-augment-intro" id="create-preview-augment-intro">
+            The <strong>Top 4 BiS to chase</strong> strip matches what you mark with BiS checkboxes (up to four, across all tiers). <strong>All tier picks</strong> shows every P/G/S slot; gold ring = BiS.
+          </p>
+          <div id="create-preview-bis-chase" class="bd-aug-bis-chase" hidden></div>
+          <div id="create-preview-bis-banner"></div>
+          <h3 class="bd-aug-subhead" id="create-preview-aug-subhead">All tier picks</h3>
+          <div class="bd-aug-tiers bd-aug-tiers--all-picks" id="create-preview-aug-tiers"></div>
+        </div>
+      </section>
+
+      <!-- YOUTUBE HIGHLIGHTS (3 phases — YouTube only) -->
+      <section class="bd-section create-section reveal" id="create-youtube-highlight">
+        <h2 class="bd-section-title">🎬 Gameplay highlights</h2>
+        <p class="create-intro">
+          Optional: up to <strong>three</strong> short <strong>first-person</strong> clips (about <strong>15 seconds</strong> with audio each),
+          hosted on <strong>YouTube</strong> only. Each slot matches a phase of the match — use footage from that time range on the
+          <strong>in-game clock</strong> when possible. We only embed allowlisted YouTube URLs.
+        </p>
+        <p id="create-youtube-hint" class="create-youtube-hint">
+          Accepted: <code>youtube.com</code>, <code>youtu.be</code>, and <code>m.youtube.com</code> watch, embed, Shorts, or Live URLs. Other domains are rejected.
+        </p>
+        <p class="create-youtube-hint create-youtube-hint--small">
+          <strong>Embed timing:</strong> “Clip start / end” are seconds <em>into the YouTube video</em> (for a tight ~15s window). Leave both empty to start at the beginning of the video.
+        </p>
+
+        <!-- Early game -->
+        <div class="create-youtube-slot" data-youtube-phase="early">
+          <h3 class="create-youtube-slot-title">Early game highlight clip</h3>
+          <p class="create-youtube-phase-hint">
+            Ideal match clock: <strong>3:00 – 9:00</strong> (footage from the opening minutes through mid-early).
+          </p>
+          <p id="create-youtube-error-early" class="create-error" role="alert" hidden></p>
+          <input type="hidden" name="youtube_early_video_id" id="youtubeEarlyVideoId" value="" />
+          <input type="hidden" name="youtube_early_start_sec" id="youtubeEarlyStartSec" value="" />
+          <input type="hidden" name="youtube_early_end_sec" id="youtubeEarlyEndSec" value="" />
+          <label class="create-field">
+            <span class="create-field-label">YouTube link</span>
+            <input
+              type="url"
+              id="youtubeEarlyUrlInput"
+              class="create-input"
+              inputmode="url"
+              autocomplete="off"
+              placeholder="https://www.youtube.com/watch?v=… or https://youtu.be/…"
+              aria-describedby="create-youtube-hint"
+            />
+          </label>
+          <div class="create-youtube-clip-fields">
+            <label class="create-field create-youtube-clip-field">
+              <span class="create-field-label">Clip start (seconds, optional)</span>
+              <input type="number" id="youtubeEarlyStartInput" class="create-input" min="0" max="86400" step="1" placeholder="e.g. 42" />
+            </label>
+            <label class="create-field create-youtube-clip-field">
+              <span class="create-field-label">Clip end (seconds, optional)</span>
+              <input type="number" id="youtubeEarlyEndInput" class="create-input" min="0" max="86400" step="1" placeholder="e.g. 57" />
+            </label>
+          </div>
+          <div class="create-youtube-preview-wrap" id="youtubeEarlyPreviewWrap" hidden>
+            <p class="create-youtube-preview-label">Preview (privacy-enhanced embed)</p>
+            <div class="create-youtube-preview-frame">
+              <iframe
+                id="youtubeEarlyIframe"
+                title="Early game YouTube preview"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm create-youtube-clear" id="youtubeEarlyClear" hidden>Remove this clip</button>
+        </div>
+
+        <!-- Mid game -->
+        <div class="create-youtube-slot" data-youtube-phase="mid">
+          <h3 class="create-youtube-slot-title">Mid game highlight clip</h3>
+          <p class="create-youtube-phase-hint">
+            Ideal match clock: <strong>9:01 – 15:00</strong>.
+          </p>
+          <p id="create-youtube-error-mid" class="create-error" role="alert" hidden></p>
+          <input type="hidden" name="youtube_mid_video_id" id="youtubeMidVideoId" value="" />
+          <input type="hidden" name="youtube_mid_start_sec" id="youtubeMidStartSec" value="" />
+          <input type="hidden" name="youtube_mid_end_sec" id="youtubeMidEndSec" value="" />
+          <label class="create-field">
+            <span class="create-field-label">YouTube link</span>
+            <input type="url" id="youtubeMidUrlInput" class="create-input" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/watch?v=… or https://youtu.be/…" aria-describedby="create-youtube-hint" />
+          </label>
+          <div class="create-youtube-clip-fields">
+            <label class="create-field create-youtube-clip-field">
+              <span class="create-field-label">Clip start (seconds, optional)</span>
+              <input type="number" id="youtubeMidStartInput" class="create-input" min="0" max="86400" step="1" placeholder="e.g. 120" />
+            </label>
+            <label class="create-field create-youtube-clip-field">
+              <span class="create-field-label">Clip end (seconds, optional)</span>
+              <input type="number" id="youtubeMidEndInput" class="create-input" min="0" max="86400" step="1" placeholder="e.g. 135" />
+            </label>
+          </div>
+          <div class="create-youtube-preview-wrap" id="youtubeMidPreviewWrap" hidden>
+            <p class="create-youtube-preview-label">Preview (privacy-enhanced embed)</p>
+            <div class="create-youtube-preview-frame">
+              <iframe
+                id="youtubeMidIframe"
+                title="Mid game YouTube preview"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm create-youtube-clear" id="youtubeMidClear" hidden>Remove this clip</button>
+        </div>
+
+        <!-- Late game -->
+        <div class="create-youtube-slot" data-youtube-phase="late">
+          <h3 class="create-youtube-slot-title">Late game highlight clip</h3>
+          <p class="create-youtube-phase-hint">
+            Ideal match clock: <strong>15:01</strong> and onward (late / closing fights).
+          </p>
+          <p id="create-youtube-error-late" class="create-error" role="alert" hidden></p>
+          <input type="hidden" name="youtube_late_video_id" id="youtubeLateVideoId" value="" />
+          <input type="hidden" name="youtube_late_start_sec" id="youtubeLateStartSec" value="" />
+          <input type="hidden" name="youtube_late_end_sec" id="youtubeLateEndSec" value="" />
+          <label class="create-field">
+            <span class="create-field-label">YouTube link</span>
+            <input type="url" id="youtubeLateUrlInput" class="create-input" inputmode="url" autocomplete="off" placeholder="https://www.youtube.com/watch?v=… or https://youtu.be/…" aria-describedby="create-youtube-hint" />
+          </label>
+          <div class="create-youtube-clip-fields">
+            <label class="create-field create-youtube-clip-field">
+              <span class="create-field-label">Clip start (seconds, optional)</span>
+              <input type="number" id="youtubeLateStartInput" class="create-input" min="0" max="86400" step="1" placeholder="e.g. 920" />
+            </label>
+            <label class="create-field create-youtube-clip-field">
+              <span class="create-field-label">Clip end (seconds, optional)</span>
+              <input type="number" id="youtubeLateEndInput" class="create-input" min="0" max="86400" step="1" placeholder="e.g. 935" />
+            </label>
+          </div>
+          <div class="create-youtube-preview-wrap" id="youtubeLatePreviewWrap" hidden>
+            <p class="create-youtube-preview-label">Preview (privacy-enhanced embed)</p>
+            <div class="create-youtube-preview-frame">
+              <iframe
+                id="youtubeLateIframe"
+                title="Late game YouTube preview"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm create-youtube-clear" id="youtubeLateClear" hidden>Remove this clip</button>
+        </div>
+      </section>
+
+      <div class="create-form-actions">
+        <a href="builds.html" class="btn btn-ghost">Cancel</a>
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="createSubmitBuildBtn"
+          disabled
+          title="Choose a champion before naming your build"
+        >Name your Build</button>
+      </div>
+    </form>
+  </main>
+
+  <dialog
+    class="create-submit-dialog"
+    id="createBuildNameDialog"
+    aria-labelledby="createSubmitDialogTitle"
+    aria-describedby="createSubmitDialogDesc"
+  >
+    <div class="create-submit-dialog-panel" id="createSubmitDialogPanel">
+      <button type="button" class="create-submit-dialog-close" id="createSubmitDialogClose" aria-label="Close">×</button>
+      <p class="create-submit-dialog-kicker">Ready?</p>
+      <h2 class="create-submit-dialog-title" id="createSubmitDialogTitle">Immortalize your build</h2>
+      <p class="create-submit-dialog-desc" id="createSubmitDialogDesc">
+        Give the people a name to remember.
+      </p>
+      <label class="create-submit-dialog-label" for="createSubmitDialogNameInput">Build title</label>
+      <input
+        type="text"
+        id="createSubmitDialogNameInput"
+        class="create-submit-dialog-input"
+        maxlength="120"
+        autocomplete="off"
+        placeholder="e.g. Full AP Lux — One-Shot Onslaught"
+      />
+      <p class="create-submit-dialog-hint" id="createSubmitDialogError" role="alert" hidden></p>
+      <div class="create-submit-dialog-actions">
+        <button type="button" class="btn btn-ghost" id="createSubmitDialogCancel">Not yet</button>
+        <button type="button" class="btn btn-primary create-submit-dialog-cta" id="createSubmitDialogConfirm">
+          Seal the build
+        </button>
+      </div>
+    </div>
+    <div class="create-submit-dialog-success" id="createSubmitDialogSuccess" hidden>
+      <p class="create-submit-dialog-success-line" aria-hidden="true">✦</p>
+      <p class="create-submit-dialog-success-title">So it is written.</p>
+      <p class="create-submit-dialog-success-name" id="createSubmitDialogSuccessName"></p>
+      <p class="create-submit-dialog-success-sub">Your title is locked in for this draft. Full publishing hooks up next.</p>
+      <button type="button" class="btn btn-primary" id="createSubmitDialogDone">Return to editor</button>
+    </div>
+  </dialog>
+
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo footer-logo" id="footer-logo">
+            <span class="logo-icon">⚔</span>
+            <span class="logo-text">ARAM <span class="logo-accent">BOUND</span></span>
+          </a>
+          <p class="footer-tagline">
+            The premier resource for League of Legends ARAM Mayhem players.
+            Share builds, discuss strategies, and conquer the Howling Abyss.
+          </p>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Navigate</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="builds.html">Builds</a></li>
+            <li><a href="create.html">Submit Build</a></li>
+          </ul>
+        </div>
+        <div class="footer-links">
+          <h4 class="footer-heading">Champions</h4>
+          <ul>
+            <li><a href="champion-detail.html?champion=ahri">Ahri Builds</a></li>
+            <li><a href="champion-detail.html?champion=lux">Lux Builds</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-disclaimer">
+          ARAM Bound is a fan-made website and is not affiliated with or endorsed by Riot Games.
+          League of Legends and all related marks are trademarks of Riot Games, Inc.
+          All champion images © Riot Games.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/playstyle-tags.js"></script>
+  <script src="js/champions-data.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/create-build.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.getElementById('createBuildForm');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

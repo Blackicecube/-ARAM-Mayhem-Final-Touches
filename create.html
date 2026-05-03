@@ -21,7 +21,7 @@
         <li><a href="builds.html"    class="nav-link active" id="nav-builds">Builds</a></li>
       </ul>
       <div class="nav-search-wrap" id="navSearchWrap">
-        <input type="search" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
+        <input type="text" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
         <button type="button" class="nav-search-submit" id="navSearchBtn" aria-label="Search">&#x1F50D;</button>
       </div>
       <div class="nav-actions">
@@ -79,6 +79,7 @@
             <img
               id="createChampSelectedImg"
               class="create-loadout-champ-picked-img"
+              src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
               alt=""
               width="48"
               height="48"
@@ -92,12 +93,13 @@
               </div>
               <div id="createChampSearchWrap" class="create-item-search create-champ-search-host">
                 <input
-                  type="search"
+                  type="text"
                   id="createChampSearchInput"
                   class="create-item-search-input"
                   placeholder="Search champions by name…"
                   autocomplete="off"
                   aria-label="Search champions"
+                  role="combobox"
                   aria-controls="createChampSearchResults"
                   aria-expanded="false"
                 />
@@ -108,12 +110,13 @@
         </div>
 
         <div class="create-loadout-summoners">
-          <label class="create-field create-loadout-spell-field">
+          <div class="create-field create-loadout-spell-field">
             <span class="create-field-label">Summoner 1</span>
             <div class="create-loadout-spell-row">
               <img
                 id="createSummoner1Img"
                 class="create-loadout-spell-icon"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
                 alt=""
                 width="40"
                 height="40"
@@ -133,13 +136,14 @@
                 <option value="cleanse">Cleanse</option>
               </select>
             </div>
-          </label>
-          <label class="create-field create-loadout-spell-field">
+          </div>
+          <div class="create-field create-loadout-spell-field">
             <span class="create-field-label">Summoner 2</span>
             <div class="create-loadout-spell-row">
               <img
                 id="createSummoner2Img"
                 class="create-loadout-spell-icon"
+                src="data:image/gif;base64,R0lGODlhAQABAAAAACw="
                 alt=""
                 width="40"
                 height="40"
@@ -159,7 +163,7 @@
                 <option value="cleanse">Cleanse</option>
               </select>
             </div>
-          </label>
+          </div>
         </div>
       </section>
 
@@ -251,7 +255,7 @@
           </div>
           <div class="create-item-search">
             <input
-              type="search"
+              type="text"
               class="create-item-search-input"
               placeholder="Search items by name to add to this path…"
               autocomplete="off"
@@ -273,9 +277,7 @@
         <h2 class="bd-section-title">✦ Favorite Augments</h2>
         <p class="create-intro">
           Pick your <strong>top 4 Prismatic</strong>, <strong>top 4 Gold</strong>, and <strong>top 4 Silver</strong>
-          augments for this build. In-game, augment <strong>colors/tiers are random</strong> — each row has a <strong>BiS</strong>
-          checkbox you can <strong>check or uncheck</strong>. Only <strong>four</strong> slots may be marked BiS at a time (counted across every tier).
-          Uncheck a BiS if you want to pick a different slot.
+          augments for this build. Only <strong>four</strong> slots may be marked BiS at a time (counted across every tier).
         </p>
         <p class="create-intro create-intro--link">
           <a
@@ -295,11 +297,11 @@
           <div class="create-augment-group-head">
             <h3 class="create-augment-group-title">Top 4 Prismatic</h3>
           </div>
-          <div class="create-augment-grid" aria-label="Top Prismatic augments">
+          <div class="create-augment-grid" role="group" aria-label="Top Prismatic augments">
             <div class="create-augment-card" data-augment-slot="p1">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Prismatic #1</span>
@@ -318,7 +320,7 @@
             <div class="create-augment-card" data-augment-slot="p2">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Prismatic #2</span>
@@ -337,7 +339,7 @@
             <div class="create-augment-card" data-augment-slot="p3">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Prismatic #3</span>
@@ -356,7 +358,7 @@
             <div class="create-augment-card" data-augment-slot="p4">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-prismatic" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Prismatic #4</span>
@@ -380,11 +382,11 @@
           <div class="create-augment-group-head">
             <h3 class="create-augment-group-title">Top 4 Gold</h3>
           </div>
-          <div class="create-augment-grid" aria-label="Top Gold augments">
+          <div class="create-augment-grid" role="group" aria-label="Top Gold augments">
             <div class="create-augment-card" data-augment-slot="g1">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Gold #1</span>
@@ -403,7 +405,7 @@
             <div class="create-augment-card" data-augment-slot="g2">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Gold #2</span>
@@ -422,7 +424,7 @@
             <div class="create-augment-card" data-augment-slot="g3">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Gold #3</span>
@@ -441,7 +443,7 @@
             <div class="create-augment-card" data-augment-slot="g4">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-gold" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Gold #4</span>
@@ -465,11 +467,11 @@
           <div class="create-augment-group-head">
             <h3 class="create-augment-group-title">Top 4 Silver</h3>
           </div>
-          <div class="create-augment-grid" aria-label="Top Silver augments">
+          <div class="create-augment-grid" role="group" aria-label="Top Silver augments">
             <div class="create-augment-card" data-augment-slot="s1">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Silver #1</span>
@@ -488,7 +490,7 @@
             <div class="create-augment-card" data-augment-slot="s2">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Silver #2</span>
@@ -507,7 +509,7 @@
             <div class="create-augment-card" data-augment-slot="s3">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Silver #3</span>
@@ -526,7 +528,7 @@
             <div class="create-augment-card" data-augment-slot="s4">
               <div class="create-augment-card-head">
                 <div class="create-augment-icon-wrap tier-silver" data-role="icon-wrap" aria-hidden="true">
-                  <img class="create-augment-icon-img" data-role="icon-img" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
+                  <img class="create-augment-icon-img" data-role="icon-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" alt="" width="56" height="56" loading="eager" decoding="async" hidden referrerpolicy="no-referrer" />
                   <span class="create-augment-icon-fallback" data-role="icon-fallback">✦</span>
                 </div>
                 <span class="create-augment-pick-label">Silver #4</span>
@@ -781,7 +783,7 @@
           </p>
         </div>
         <div class="footer-links">
-          <h4 class="footer-heading">Navigate</h4>
+          <h3 class="footer-heading">Navigate</h3>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="champions.html">Champions</a></li>
@@ -790,7 +792,7 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4 class="footer-heading">Browse builds</h4>
+          <h3 class="footer-heading">Browse builds</h3>
           <ul>
             <li><a href="builds.html?sort=votes">Most upvoted builds</a></li>
             <li><a href="builds.html?sort=spicy">Spiciest builds</a></li>

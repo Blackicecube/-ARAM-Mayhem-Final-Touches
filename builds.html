@@ -25,7 +25,7 @@
       </ul>
       <!-- Global search -->
       <div class="nav-search-wrap" id="navSearchWrap">
-        <input type="search" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
+        <input type="text" class="nav-search-input" id="navSearch" placeholder="Search builds…" autocomplete="off" aria-label="Search all builds" />
         <button type="button" class="nav-search-submit" id="navSearchBtn" aria-label="Search">&#x1F50D;</button>
       </div>
       <div class="nav-actions">
@@ -58,7 +58,7 @@
       <!-- Live search -->
       <div class="hero-search-wrap">
         <input
-          type="search"
+          type="text"
           class="hero-search-input"
           id="buildSearch"
           placeholder="Search builds by name…"
@@ -133,6 +133,7 @@
   ==================================================== -->
   <section class="section" id="builds-section" style="background:var(--bg-surface);">
     <div class="container">
+      <h2 class="section-title">Build listings</h2>
 
       <!-- Results count -->
       <div class="builds-results-bar">
@@ -179,9 +180,9 @@
             </div>
           </div>
           <div class="feed-card-body">
-            <div class="feed-build-title">Full AP Burst Lux — One-Shot Everything</div>
+            <h3 class="feed-build-title">Full AP Burst Lux — One-Shot Everything</h3>
             <div class="feed-meta-row">
-              <span class="feed-stars" aria-label="4.7 out of 5">
+              <span class="feed-stars" role="img" aria-label="4.7 out of 5">
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star">★</span>
@@ -243,9 +244,9 @@
             </div>
           </div>
           <div class="feed-card-body">
-            <div class="feed-build-title">Rocket Rampage — Crit &amp; Reset Chaos</div>
+            <h3 class="feed-build-title">Rocket Rampage — Crit &amp; Reset Chaos</h3>
             <div class="feed-meta-row">
-              <span class="feed-stars" aria-label="4.4 out of 5">
+              <span class="feed-stars" role="img" aria-label="4.4 out of 5">
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star">★</span>
@@ -307,9 +308,9 @@
             </div>
           </div>
           <div class="feed-card-body">
-            <div class="feed-build-title">Monolith Frontline — Unkillable CC Tank</div>
+            <h3 class="feed-build-title">Monolith Frontline — Unkillable CC Tank</h3>
             <div class="feed-meta-row">
-              <span class="feed-stars" aria-label="4.0 out of 5">
+              <span class="feed-stars" role="img" aria-label="4.0 out of 5">
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star">★</span>
@@ -371,9 +372,9 @@
             </div>
           </div>
           <div class="feed-card-body">
-            <div class="feed-build-title">Depth Charge — Hooks, Flays &amp; Lantern Saves</div>
+            <h3 class="feed-build-title">Depth Charge — Hooks, Flays &amp; Lantern Saves</h3>
             <div class="feed-meta-row">
-              <span class="feed-stars" aria-label="3.9 out of 5">
+              <span class="feed-stars" role="img" aria-label="3.9 out of 5">
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star filled">★</span><span class="feed-star filled">★</span>
                 <span class="feed-star">★</span>
@@ -445,7 +446,7 @@
           </p>
         </div>
         <div class="footer-links">
-          <h4 class="footer-heading">Navigate</h4>
+          <h3 class="footer-heading">Navigate</h3>
           <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="champions.html">Champions</a></li>
@@ -454,7 +455,7 @@
           </ul>
         </div>
         <div class="footer-links">
-          <h4 class="footer-heading">Browse builds</h4>
+          <h3 class="footer-heading">Browse builds</h3>
           <ul>
             <li><a href="builds.html?sort=votes">Most upvoted builds</a></li>
             <li><a href="builds.html?sort=spicy">Spiciest builds</a></li>
@@ -804,7 +805,7 @@
           </div>
         </div>
         <div class="feed-card-body">
-          <div class="feed-build-title">${b.title}</div>
+          <h3 class="feed-build-title">${b.title}</h3>
           <div class="feed-meta-row">
             <span class="feed-author">by <strong>${b.author || 'You'}</strong></span>
             <span class="feed-patch">Patch ${b.patch || ''}</span>

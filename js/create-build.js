@@ -1239,7 +1239,7 @@ function renderAlternateBlocks() {
           <div class="bd-subsection-title" style="margin-top:8px;">Items</div>
           <div class="create-item-row-host">${renderItemRow(list, pk)}</div>
           <div class="create-item-search">
-            <input type="search" class="create-item-search-input" placeholder="Search items by name…" autocomplete="off" aria-label="Search items to add" />
+            <input type="text" class="create-item-search-input" placeholder="Search items by name…" autocomplete="off" aria-label="Search items to add" />
             <div class="create-item-search-results" hidden></div>
           </div>
         </div>
